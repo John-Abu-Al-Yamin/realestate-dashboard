@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
-  base: "/realestate/",
+  base: "/",
   plugins: [
     tailwindcss(),
 
@@ -18,8 +18,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    outDir: "dist",
-    emptyOutDir: true,
-  },
+  // build: {
+  //   outDir: "dist",
+  //   emptyOutDir: true,
+  // },
 });
