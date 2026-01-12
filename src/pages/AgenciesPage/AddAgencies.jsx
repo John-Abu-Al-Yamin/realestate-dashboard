@@ -226,7 +226,10 @@ const AddAgencies = () => {
 
     formData.append("commercial_license", data.commercial_license || "");
     if (data.commercial_license_attachment?.[0]) {
-      formData.append("commercial_license_attachment", data.commercial_license_attachment[0]);
+      formData.append(
+        "commercial_license_attachment",
+        data.commercial_license_attachment[0]
+      );
     }
 
     formData.append("tax_license", data.tax_license || "");
@@ -424,8 +427,9 @@ const AddAgencies = () => {
               <>
                 {/* Loading active progress (hidden until data loads) */}
                 <div
-                  className={`absolute top-1/2 ${dir === "rtl" ? "right-0" : "left-0"
-                    } h-1 bg-black -z-10 transform -translate-y-1/2 transition-all duration-300`}
+                  className={`absolute top-1/2 ${
+                    dir === "rtl" ? "right-0" : "left-0"
+                  } h-1 bg-black -z-10 transform -translate-y-1/2 transition-all duration-300`}
                   style={{ width: `0%` }}
                 />
 
@@ -447,8 +451,9 @@ const AddAgencies = () => {
               <>
                 {/* Active Progress Bar */}
                 <div
-                  className={`absolute top-1/2 ${dir === "rtl" ? "right-0" : "left-0"
-                    } h-1 bg-black -z-10 transform -translate-y-1/2 transition-all duration-300`}
+                  className={`absolute top-1/2 ${
+                    dir === "rtl" ? "right-0" : "left-0"
+                  } h-1 bg-black -z-10 transform -translate-y-1/2 transition-all duration-300`}
                   style={{
                     width: `${(step / (stepsLabels.length - 1)) * 100}%`,
                   }}
@@ -466,20 +471,22 @@ const AddAgencies = () => {
                       className="flex flex-col items-center bg-white px-2"
                     >
                       <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isCurrent
-                          ? "border-black bg-black text-white"
-                          : isCompleted
+                        className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                          isCurrent
+                            ? "border-black bg-black text-white"
+                            : isCompleted
                             ? "border-green-600 bg-green-600 text-white"
                             : "border-gray-300 bg-white text-gray-400"
-                          }`}
+                        }`}
                       >
                         {isCompleted ? "✓" : index + 1}
                       </div>
                       <span
-                        className={`text-xs mt-2 font-medium ${isCurrent || isCompleted
-                          ? "text-black"
-                          : "text-gray-400"
-                          }`}
+                        className={`text-xs mt-2 font-medium ${
+                          isCurrent || isCompleted
+                            ? "text-black"
+                            : "text-gray-400"
+                        }`}
                       >
                         {label}
                       </span>
@@ -499,7 +506,7 @@ const AddAgencies = () => {
           </div>
           <div className="flex justify-between pt-4">
             {/* زر السابق */}
-            <Button
+            {/* <Button
               type="button"
               variant="outline"
               onClick={handlePrevStep}
@@ -507,7 +514,7 @@ const AddAgencies = () => {
               className="w-40"
             >
               {t("Previous")}
-            </Button>
+            </Button> */}
 
             {/* زر التالي / الإرسال */}
             {step < 4 ? (
@@ -528,8 +535,8 @@ const AddAgencies = () => {
                   isPendingLegalDate ||
                   isPendingVerificationDate ||
                   isPendingSteps) && (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  )}
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
                 {t("Next")}
               </Button>
             ) : (
@@ -538,7 +545,11 @@ const AddAgencies = () => {
                 onClick={handleStepSubmit}
                 className="bg-black text-white hover:bg-gray-800 w-40"
               >
-                {t("Submit")}
+                {isPendingVisualIdentityDate ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  t("Submit")
+                )}
               </Button>
             )}
           </div>
