@@ -9,7 +9,7 @@ const Header = () => {
     const { t } = useTranslation();
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-yellow-400 to-yellow-500 p-6 shadow-lg">
+    <div className="relative overflow-hidden rounded-3xl bg-gray-100 p-6 shadow-sm">
       <div className="flex justify-between items-center mb-4">
         {/* العنوان */}
         <h1 className="text-xl font-bold text-gray-900">
@@ -21,14 +21,14 @@ const Header = () => {
           <Button
             size="icon"
             variant="ghost"
-            className="h-10 w-10 rounded-full bg-white/90 hover:bg-white"
+            className="h-10 w-10 rounded-full bg-black/90 hover:bg-black"
           >
-            <Bell className="h-5 w-5 text-gray-700" />
+            <Bell className="h-5 w-5 text-gray-100" />
           </Button>
 
-          <Avatar className="h-10 w-10 border-2 border-white">
+          <Avatar className="h-10 w-10 border-2 border-gray-700">
             <AvatarImage src="/professional-man.jpg" />
-            <AvatarFallback className="bg-gray-200 text-gray-700">
+            <AvatarFallback className="bg-black/90 hover:bg-black text-gray-100">
               A
             </AvatarFallback>
           </Avatar>

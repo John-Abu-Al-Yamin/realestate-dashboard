@@ -65,7 +65,7 @@ const SearchAndFiltersSubscriptionPlan = ({
   };
 
   return (
-    <div className="space-y-6 rounded-lg bg-card p-6">
+    <div className="space-y-6 rounded-lg bg-card py-6">
       {/* Toggle Buttons */}
       <div className="bg-neutral-100 my-5 grid grid-cols-2 p-1 h-14 rounded-[12px]">
         <button

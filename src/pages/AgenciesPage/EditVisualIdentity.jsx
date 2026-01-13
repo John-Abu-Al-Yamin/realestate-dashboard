@@ -242,7 +242,7 @@ const EditVisualIdentity = () => {
                 >
                   <option value="">{t("Select Font")}</option>
                   <option value="cairo" >Twentieth Century</option>
-                  <option value="IBM">IBM</option>
+                  <option value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</option>
                   <option value="open_sans">Open Sans</option>
                   <option value="tajawal">Tajawal</option>
                 </select>

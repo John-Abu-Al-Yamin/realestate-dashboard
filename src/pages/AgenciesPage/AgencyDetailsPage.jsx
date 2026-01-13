@@ -17,6 +17,7 @@ import {
   Briefcase,
   SquarePen,
   Link as LinkIcon,
+  ArrowUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -105,7 +106,7 @@ const AgencyDetailsPage = () => {
   const faqs = legalData?.faqs ? JSON.parse(legalData.faqs) : [];
 
   return (
-    <div className="min-h-screen bg-gray-50/50 dark:bg-gray-950/50 p-4 md:p-6">
+    <div className="min-h-screen relative bg-gray-50/50 dark:bg-gray-950/50 p-4 md:p-6">
       <div className="w-full mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -131,7 +132,13 @@ const AgencyDetailsPage = () => {
             {isRTL ? "ملخص إعداد الوكالة" : "Agency Setup Summary"}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+            <div
+              onClick={() => {
+                const section = document.getElementById("master-data"); // id الخاص بالsection
+                section?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg cursor-pointer"
+            >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
                   masterData
@@ -150,7 +157,13 @@ const AgencyDetailsPage = () => {
               </span>
             </div>
 
-            <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+            <div
+              onClick={() => {
+                const section = document.getElementById("profile");
+                section?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg cursor-pointer"
+            >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
                   profileData
@@ -169,7 +182,13 @@ const AgencyDetailsPage = () => {
               </span>
             </div>
 
-            <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+            <div
+              onClick={() => {
+                const section = document.getElementById("verification");
+                section?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg cursor-pointer"
+            >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
                   verificationData
@@ -188,7 +207,13 @@ const AgencyDetailsPage = () => {
               </span>
             </div>
 
-            <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+            <div
+              onClick={() => {
+                const section = document.getElementById("legal");
+                section?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg cursor-pointer"
+            >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
                   legalData
@@ -207,7 +232,13 @@ const AgencyDetailsPage = () => {
               </span>
             </div>
 
-            <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+            <div
+              onClick={() => {
+                const section = document.getElementById("visual-identity");
+                section?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg cursor-pointer"
+            >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
                   visualIdentityData?.id
@@ -231,7 +262,10 @@ const AgencyDetailsPage = () => {
         <Separator className="my-6" />
         {/* Master Data Section */}
         {masterData && (
-          <div className="bg-white dark:bg-gray-900 rounded-lg  p-6">
+          <div
+            id="master-data"
+            className="bg-white dark:bg-gray-900 rounded-lg  p-6"
+          >
             <div className="flex items-center justify-between gap-3 mb-6">
               <div className="flex items-center  gap-3">
                 <Building2 className="w-6 h-6 text-black dark:text-blue-400" />
@@ -391,7 +425,10 @@ const AgencyDetailsPage = () => {
 
         {/* Profile Section */}
         {profileData && (
-          <div className="bg-white dark:bg-gray-900 rounded-lg p-6">
+          <div
+            id="profile"
+            className="bg-white dark:bg-gray-900 rounded-lg p-6"
+          >
             <div className="flex items-center justify-between gap-3 mb-6">
               <div className="flex items-center gap-3">
                 <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -483,7 +520,7 @@ const AgencyDetailsPage = () => {
             </div>
 
             <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg my-4">
-              <div  className="w-full flex flex-col">
+              <div className="w-full flex flex-col">
                 {/* Label فوق الـ box */}
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                   {isRTL ? "المرفق" : "Attachment"}
@@ -505,7 +542,10 @@ const AgencyDetailsPage = () => {
         <Separator className="my-6" />
         {/* Verification Section */}
         {verificationData && (
-          <div className="bg-white dark:bg-gray-900 rounded-lg  p-6">
+          <div
+            id="verification"
+            className="bg-white dark:bg-gray-900 rounded-lg  p-6"
+          >
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
@@ -677,7 +717,7 @@ const AgencyDetailsPage = () => {
         <Separator className="my-6" />
         {/* Legal Section */}
         {legalData && (
-          <div className="bg-white dark:bg-gray-900 rounded-lg  p-6">
+          <div id="legal" className="bg-white dark:bg-gray-900 rounded-lg  p-6">
             <div className="flex items-center justify-between gap-3 mb-6">
               <div className="flex items-center gap-3">
                 <FileText className="w-6 h-6 text-orange-600 dark:text-orange-400" />
@@ -749,7 +789,10 @@ const AgencyDetailsPage = () => {
 
         <Separator className="my-6" />
         {/* Visual Identity Section */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg  p-6">
+        <div
+          id="visual-identity"
+          className="bg-white dark:bg-gray-900 rounded-lg  p-6"
+        >
           <div className="flex items-center justify-between gap-3 mb-6">
             <div className="flex items-center gap-3">
               <Palette className="w-6 h-6 text-pink-600 dark:text-pink-400" />
@@ -883,6 +926,13 @@ const AgencyDetailsPage = () => {
           )}
         </div>
       </div>
+      {/* Scroll to Top Button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed  bottom-26 left-8 lg:left-12 lg:bottom-6 p-3 bg-gray-200 text-black rounded-full cursor-pointer shadow-lg hover:bg-gray-300 transition-colors"
+      >
+        <ArrowUp className="w-5 h-5" />
+      </button>
     </div>
   );
 };

@@ -73,7 +73,7 @@ const AddSubscriptions = () => {
     const subscriptionData = {
       ...data,
       start_date: new Date(data.start_date).toISOString(),
-      end_date: new Date(data.end_date).toISOString()
+      end_date: new Date(data.end_date).toISOString(),
     };
 
     addSubscription(
@@ -94,7 +94,7 @@ const AddSubscriptions = () => {
       <CustomHeader title={t("add_subscription")} />
 
       {/* Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Subscription Plan */}
           <div className="w-full">
@@ -109,7 +109,9 @@ const AddSubscriptions = () => {
                   onValueChange={(val) => field.onChange(Number(val))}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("select_subscription_plan_placeholder")} />
+                    <SelectValue
+                      placeholder={t("select_subscription_plan_placeholder")}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {subscriptionPlans?.data?.data?.map((plan) => (

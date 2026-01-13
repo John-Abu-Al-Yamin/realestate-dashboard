@@ -34,7 +34,7 @@ const SearchAndFiltersSelectActicityLog = ({
   ];
 
   return (
-    <div className="space-y-6 rounded-lg bg-card p-6">
+    <div className="space-y-6 rounded-lg bg-card py-6">
       <div className="mt-4 grid gap-4 md:grid-cols-1 w-full">
         {/* الحالة */}
         <div className="w-full">

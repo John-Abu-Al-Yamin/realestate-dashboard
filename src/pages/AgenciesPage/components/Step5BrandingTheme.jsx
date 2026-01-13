@@ -190,7 +190,7 @@ const Step5BrandingTheme = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="cairo">Twentieth Century</SelectItem>
-                  <SelectItem value="IBM">IMB</SelectItem>
+                  <SelectItem value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</SelectItem>
                   <SelectItem value="open_sans">Open Sans</SelectItem>
                   <SelectItem value="tajawal">Tajawal</SelectItem>
                 </SelectContent>

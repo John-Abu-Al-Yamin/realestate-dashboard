@@ -11,7 +11,7 @@ const CustomHeader = ({ title, description }) => {
   const isRTL = i18n.language === "ar";
 
   return (
-    <header className="flex items-center justify-between text-neutral-950 mb-10">
+    <header className="flex items-center justify-between text-neutral-950 mb-10 px-6">
       <div className="flex-1">
         <h1 className="text-2xl font-bold text-foreground">{title}</h1>
         {description && (

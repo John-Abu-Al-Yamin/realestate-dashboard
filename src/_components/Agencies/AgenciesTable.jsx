@@ -63,7 +63,7 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
   const formatDate = (dateString) => {
     if (!dateString) return "-";
     const date = new Date(dateString);
-    return date.toLocaleDateString(isRTL ? "ar-SA" : "en-US", {
+    return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",

@@ -116,7 +116,7 @@ const EditeMangerAgancey = () => {
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 py-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">{t("edit manager agency")}</h2>
         <div className="text-sm text-muted-foreground">

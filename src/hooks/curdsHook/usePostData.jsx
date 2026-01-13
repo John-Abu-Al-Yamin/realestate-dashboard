@@ -1,5 +1,3 @@
-
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AlertCircle, Check } from "lucide-react";
 import { useState } from "react";
@@ -65,7 +63,7 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
             fontSize: "18px",
             fontWeight: "800",
             height: "20px",
-            width: "512px",
+            width: "100%",
             padding: "30px 20px",
             borderRadius: "12px",
             display: "flex",
@@ -133,7 +131,7 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
                   fontSize: "18px",
                   fontWeight: "800",
                   minHeight: "60px",
-                  width: "512px",
+                  width: "100%",
                   padding: "30px 20px",
                   borderRadius: "12px",
                   display: "flex",
@@ -180,15 +178,17 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
                 border: "1px solid #FFA2A2",
                 color: "#2E2E34",
                 backgroundColor: "#FFE1E1",
-                fontSize: "18px",
+                fontSize: "16px",
                 fontWeight: "800",
                 minHeight: "60px",
-                width: "512px",
+                width: "100%",
                 padding: "30px 20px",
                 borderRadius: "12px",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: "10px",
+                margin: "0 auto",
               },
             });
           }
@@ -201,7 +201,7 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
               style: {
                 fontSize: "20px",
                 fontWeight: "bold",
-                marginLeft: "10px",
+                marginLeft: "8px",
                 cursor: "pointer",
                 color: "#fff",
                 backgroundColor: "#ff4444",
@@ -232,12 +232,13 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
               fontSize: "18px",
               fontWeight: "800",
               minHeight: "60px",
-              width: "512px",
+              width: "100%",
               padding: "30px 20px",
               borderRadius: "12px",
               display: "flex",
               alignItems: "center",
               gap: "10px",
+              margin: "0 auto",
             },
           });
         }
