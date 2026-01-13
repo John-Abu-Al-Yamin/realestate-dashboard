@@ -370,5 +370,9 @@
   "Edit Manager": "تعديل المدير",
   "edit manager agency": "تعديل مدير الوكالة",
   "city": "المدينه",
-  "No subscriptions-plans found":"لا توجد خطط الاشتراك"
+  "No subscriptions-plans found": "لا توجد خطط الاشتراك",
+  "search": "بحث",
+  "Search Advanced": "بحث متقدم",
+  "search_placeholder": "ابحث بالاسم ...",
+  "Not Found Any Agencies": "لا توجد اي وكالات"
 }

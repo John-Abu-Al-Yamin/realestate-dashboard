@@ -375,5 +375,9 @@
   "Edit Manager": "Edit Manager",
   "edit manager agency": "edit manager agency",
   "city": "City",
-  "No subscriptions-plans found":"No subscriptions-plans found"
+  "No subscriptions-plans found": "No subscriptions-plans found",
+  "search": "Search",
+  "Search Advanced": "Search Advanced",
+  "search_placeholder": "Search by name ",
+  "Not Found Any Agencies": "Not Found Any Agencies"
 }

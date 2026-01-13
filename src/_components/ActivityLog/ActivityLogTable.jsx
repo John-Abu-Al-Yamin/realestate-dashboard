@@ -54,25 +54,31 @@ const ActivityLogTable = ({ logs, isPending }) => {
   };
 
   // Format subject info
-  const formatSubjectInfo = (subject) => {
-    if (!subject) return { type: "-", id: "-", name: "-" };
+const formatSubjectInfo = (subject) => {
+  if (!subject) return { type: "-", id: "-", name: "-" };
 
-    const type = subject.type || "-";
-    const id = subject.data?.id || "-";
+  const type = subject.type || "-";
+  const id = subject.data?.id || "-";
 
-    let name = "";
-    if (subject.type === "AgencyMasterData" && subject.data?.brand_name) {
-      name = subject.data.brand_name;
-    } else if (subject.type === "Manager" && subject.data) {
-      name = `${subject.data.first_name || ""} ${
-        subject.data.last_name || ""
-      }`.trim();
-    } else if (subject.type === "Agency") {
-      name = subject.data?.setup_status || "-";
-    }
+  let name = "-";
 
-    return { type, id, name };
-  };
+  if (subject.type === "AgencyMasterData" && subject.data?.brand_name) {
+    name = subject.data.brand_name;
+  } else if (subject.type === "Manager" && subject.data) {
+    name = `${subject.data.first_name || ""} ${subject.data.last_name || ""}`.trim();
+  } else if (subject.type === "Agency" && subject.data) {
+    // جلب الاسم الحقيقي من الـ master_data لو موجود
+    name =
+      subject.data?.master_data?.brand_name || // لو موجود في الـ master_data
+      subject.data?.profile?.agency_name ||   // لو عندك agency.profile فيه الاسم
+      `Agency #${id}`;                        // fallback
+  } else if (subject.type === "SubscriptionPlan" && subject.data?.name) {
+    name = subject.data.name;
+  }
+
+  return { type, id, name };
+};
+
 
   // Format date/time
   const formatDateTime = (dateString) => {

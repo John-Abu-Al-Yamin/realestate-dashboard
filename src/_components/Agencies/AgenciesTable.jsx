@@ -8,6 +8,7 @@ import {
   Check,
   X,
   Info,
+  UserPen,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -288,13 +289,6 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                             </DropdownMenuItem>
 
                             <DropdownMenuItem
-                              onClick={() => navigate(`/agencies/${row.id}`)}
-                            >
-                              <Pencil className="mr-2 h-4 w-4" />
-                              {t("Edit")}
-                            </DropdownMenuItem>
-
-                            <DropdownMenuItem
                               onClick={() =>
                                 navigate(
                                   `/agencies/edit-manager/${row.manager_id}`,
@@ -306,9 +300,17 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                                 )
                               }
                             >
-                              <Pencil className="mr-2 h-4 w-4" />
+                              <UserPen className="mr-2 h-4 w-4" />
                               {t("Edit Manager")}
                             </DropdownMenuItem>
+
+                            <DropdownMenuItem
+                              onClick={() => navigate(`/agencies/${row.id}`)}
+                            >
+                              <Pencil className="mr-2 h-4 w-4" />
+                              {t("Edit")}
+                            </DropdownMenuItem>
+
                             {/* 
                             <DropdownMenuItem
                               className="text-red-600"
@@ -337,7 +339,7 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                     colSpan={headers.length}
                     className="p-4 text-center text-gray-500"
                   >
-                    {t("No data available")}
+                    {t("Not Found Any Agencies")}
                   </td>
                 </tr>
               )}

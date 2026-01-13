@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRef } from "react";
+import { useTranslation } from "next-i18next";
 
 const SearchAndFiltersManger = ({
   searchValue,
@@ -18,6 +19,9 @@ const SearchAndFiltersManger = ({
   setStatusValue,
   onSearch,
 }) => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === "rtl";
+
   const [advancedFiltersOpen, setAdvancedFiltersOpen] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
@@ -65,18 +69,20 @@ const SearchAndFiltersManger = ({
       {/* Toggle Buttons */}
       <div className="bg-neutral-100 my-5 grid grid-cols-2 p-1 h-14 rounded-[12px]">
         <button
-          className={`rounded-xl text-[16px] font-medium ${!advancedFiltersOpen ? "bg-white text-primary" : ""
-            }`}
+          className={`rounded-xl text-[16px] font-medium ${
+            !advancedFiltersOpen ? "bg-white text-primary" : ""
+          }`}
           onClick={() => setAdvancedFiltersOpen(false)}
         >
-          بحث
+          {t("search")}
         </button>
         <button
-          className={`rounded-xl text-[16px] font-medium ${advancedFiltersOpen ? "bg-white text-primary" : ""
-            }`}
+          className={`rounded-xl text-[16px] font-medium ${
+            advancedFiltersOpen ? "bg-white text-primary" : ""
+          }`}
           onClick={() => setAdvancedFiltersOpen(true)}
         >
-          بحث متقدم
+          {t("Search Advanced")}
         </button>
       </div>
 
@@ -89,7 +95,7 @@ const SearchAndFiltersManger = ({
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && onSearch()}
-          placeholder="ابحث بالاسم أو الهاتف أو البريد أو رقم التسجيل..."
+          placeholder={t("search_placeholder")}
           className="pl-10 pr-20"
         />
 
@@ -109,10 +115,11 @@ const SearchAndFiltersManger = ({
           type="button"
           onClick={toggleVoiceSearch}
           className={`absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 transition
-    ${isListening
-              ? "bg-black text-white animate-pulse"
-              : "bg-gray-100 text-black"
-            }`}
+    ${
+      isListening
+        ? "bg-black text-white animate-pulse"
+        : "bg-gray-100 text-black"
+    }`}
         >
           <Mic className="h-4 w-4" />
         </button>
@@ -132,12 +139,12 @@ const SearchAndFiltersManger = ({
               onValueChange={(val) => setStatusValue(val)}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("all_cases")}/>
+                <SelectValue placeholder={t("all_cases")} />
               </SelectTrigger>
               <SelectContent>
                 {/* <SelectItem value="">كل الحالات</SelectItem> */}
-                <SelectItem value="active">نشط</SelectItem>
-                <SelectItem value="inactive">غير نشط</SelectItem>
+                <SelectItem value="active">{t("Active")}</SelectItem>
+                <SelectItem value="inactive">{t("Inactive")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -147,7 +154,7 @@ const SearchAndFiltersManger = ({
       {/* زر البحث */}
       <div className="mt-4">
         <Button className="w-full md:w-32 h-10 text-sm" onClick={onSearch}>
-          بحث
+          {t("search")}{" "}
         </Button>
       </div>
     </div>

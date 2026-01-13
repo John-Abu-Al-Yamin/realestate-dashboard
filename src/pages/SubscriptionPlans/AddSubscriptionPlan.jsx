@@ -23,7 +23,7 @@ export default function AddSubscriptionPlan() {
     active: z.boolean().default(true),
     max_storage: z.coerce.number().gt(0, t("max_storage_required")),
     max_properties: z.coerce.number().gt(0, t("max_properties_required")),
-    max_staff: z.coerce.number().gt(0, t("max_staff_required")),
+    max_stuff: z.coerce.number().gt(0, t("max_stuff_required")),
   });
 
   const {
@@ -38,7 +38,7 @@ export default function AddSubscriptionPlan() {
       price: 0,
       max_storage: 0,
       max_properties: 0,
-      max_staff: 0,
+      max_stuff: 0,
     },
   });
 
@@ -148,11 +148,11 @@ export default function AddSubscriptionPlan() {
 
             {/* Max Staff */}
             <div className="space-y-2">
-              <Label htmlFor="max_staff">{t("max_staff_label")}</Label>
-              <Input id="max_staff" type="number" {...register("max_staff")} />
-              {errors.max_staff && (
+              <Label htmlFor="max_stuff">{t("max_stuff_label")}</Label>
+              <Input id="max_stuff" type="number" {...register("max_stuff")} />
+              {errors.max_stuff && (
                 <p className="text-xs text-destructive">
-                  {errors.max_staff.message}
+                  {errors.max_stuff.message}
                 </p>
               )}
             </div>

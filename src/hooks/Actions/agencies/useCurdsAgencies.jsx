@@ -4,11 +4,14 @@ import usePutData from "@/hooks/curdsHook/usePutData";
 import endPoints from "@/hooks/EndPoints/endPoints";
 import queryKeys from "@/hooks/EndPoints/queryKeys";
 
-export const useGetAllAgencies = (page) => {
+export const useGetAllAgencies = (page, region) => {
   const { data, isPending, refetch, ...rest } = useGetData({
     url: endPoints.agencies,
-    params: { page },
-    queryKeys: [queryKeys.agencies, page],
+    params: {
+      page,
+      ...(region ? { "filter[region]": region } : {}),
+    },
+    queryKeys: [queryKeys.agencies, page, region],
   });
 
   return {

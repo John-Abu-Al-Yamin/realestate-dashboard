@@ -64,7 +64,7 @@ const SearchAndFiltersSelectActicityLog = ({
 
       <div className="mt-4">
         <Button className="w-full md:w-32 h-10 text-sm" onClick={onSearch}>
-          بحث
+          {t("search")}
         </Button>
       </div>
     </div>

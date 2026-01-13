@@ -5,23 +5,23 @@ import { useGetAllAgencies } from "@/hooks/Actions/agencies/useCurdsAgencies";
 import React, { useState } from "react";
 
 const AgenciesPage = () => {
-
   const [page, setPage] = useState(1);
+  const [region, setRegion] = useState("");
 
-
-  const { data: allagencies, isPending } = useGetAllAgencies(page);
-
+  const { data: allagencies, isPending } = useGetAllAgencies(page, region);
   const agencies = allagencies?.data;
-
-
-  console.log("agencies", agencies);
 
   return (
     <div className="min-h-screen bg-background dark:bg-background p-4 md:p-6 ">
       <AgenciesHeader />
-      <SearchAndFilters />
+      <SearchAndFilters region={region} setRegion={setRegion} />
       <div className="overflow-x-auto">
-        <AgenciesTable agencies={agencies} isPending={isPending} page={page} setPage={setPage}/>
+        <AgenciesTable
+          agencies={agencies}
+          isPending={isPending}
+          page={page}
+          setPage={setPage}
+        />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
+import { useTranslation } from "next-i18next";
 
 const SearchAndFiltersSubscriptions = ({
   searchValue,
@@ -17,6 +18,9 @@ const SearchAndFiltersSubscriptions = ({
   setStatusValue,
   onSearch,
 }) => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === "rtl";
+
   const [advancedFiltersOpen, setAdvancedFiltersOpen] = useState(false);
 
   const [isListening, setIsListening] = useState(false);
@@ -70,7 +74,7 @@ const SearchAndFiltersSubscriptions = ({
           }`}
           onClick={() => setAdvancedFiltersOpen(false)}
         >
-          بحث
+          {t("search")}
         </button>
         <button
           className={`rounded-xl text-[16px] font-medium ${
@@ -78,7 +82,7 @@ const SearchAndFiltersSubscriptions = ({
           }`}
           onClick={() => setAdvancedFiltersOpen(true)}
         >
-          بحث متقدم
+          {t("Search Advanced")}
         </button>
       </div>
 
@@ -91,7 +95,7 @@ const SearchAndFiltersSubscriptions = ({
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && onSearch()}
-          placeholder="ابحث بالاسم أو الهاتف أو البريد أو رقم التسجيل..."
+          placeholder={t("search_placeholder")}
           className="pl-10 pr-20"
         />
 
@@ -138,8 +142,8 @@ const SearchAndFiltersSubscriptions = ({
               </SelectTrigger>
               <SelectContent>
                 {/* <SelectItem value="all">كل الحالات</SelectItem> */}
-                <SelectItem value="1">نشط</SelectItem>
-                <SelectItem value="0">غير نشط</SelectItem>
+                <SelectItem value="1">{t("active")}</SelectItem>
+                <SelectItem value="0">{t("inactive")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -149,7 +153,7 @@ const SearchAndFiltersSubscriptions = ({
       {/* زر البحث */}
       <div className="mt-4">
         <Button className="w-full md:w-32 h-10 text-sm" onClick={onSearch}>
-          بحث
+          {t("search")}
         </Button>
       </div>
     </div>

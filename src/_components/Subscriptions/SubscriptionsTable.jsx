@@ -98,9 +98,10 @@ const SubscriptionsTable = ({
                   index % 2 === 0 ? "bg-background" : "bg-muted/70"
                 } hover:bg-muted/60`}
               >
-                {/* عرض الـ Agency فقط */}
+                {/* عرض الـ Agency ID واسم الوكالة */}
                 <TableCell className="font-medium">
-                  {subscription.agency?.id || "N/A"}
+                  #{subscription.agency?.id || "N/A"} -{" "}
+                  {subscription.agency?.master_data?.user_name || "N/A"}
                 </TableCell>
 
                 <TableCell>

@@ -9,8 +9,13 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
+import { useTranslation } from "next-i18next";
+import { useGetRegions } from "@/hooks/Actions/region/useCardRegion";
 
-const SearchAndFilters = () => {
+const SearchAndFilters = ({ region, setRegion }) => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === "rtl";
+
   const [advancedFiltersOpen, setAdvancedFiltersOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [isListening, setIsListening] = useState(false);
@@ -54,16 +59,12 @@ const SearchAndFilters = () => {
     };
   };
 
-  const handleSearch = () => {
-    // هنا بقى:
-    // - filter local
-    // - أو API request
-    console.log("Search:", searchValue);
-  };
+  const { data: regions, isPending: regionsIsPending } = useGetRegions();
+  const regionsData = regions?.data?.data || [];
+  console.log(regionsData);
 
   return (
     <div className="space-y-6 rounded-lg bg-card p-6">
-      
       {/* Toggle Buttons */}
       <div className="bg-neutral-100 my-5 grid grid-cols-2 p-1 h-14 rounded-[12px]">
         <button
@@ -72,7 +73,7 @@ const SearchAndFilters = () => {
           }`}
           onClick={() => setAdvancedFiltersOpen(false)}
         >
-          بحث
+          {t("search")}
         </button>
         <button
           className={`rounded-xl text-[16px] font-medium ${
@@ -80,7 +81,7 @@ const SearchAndFilters = () => {
           }`}
           onClick={() => setAdvancedFiltersOpen(true)}
         >
-          بحث متقدم
+          {t("Search Advanced")}
         </button>
       </div>
 
@@ -92,7 +93,7 @@ const SearchAndFilters = () => {
           type="text"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="ابحث بالاسم أو الهاتف أو البريد أو رقم التسجيل..."
+          placeholder={t("search_placeholder")}
           className="pl-10 pr-12"
         />
         <button
@@ -111,55 +112,26 @@ const SearchAndFilters = () => {
 
       {/* Advanced Filters */}
       {advancedFiltersOpen && (
-        <div className="mt-4 grid gap-4 md:grid-cols-3 w-full">
+        <div className="mt-4 grid gap-4 md:grid-cols-1 w-full">
           {/* الحالة */}
           <div className="w-full">
             <label className="mb-2 block text-sm font-medium text-foreground">
-{t("status")}            </label>
-            <Select className="w-full">
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("all_cases")}/>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t("all_cases")}</SelectItem>
-                <SelectItem value="active">نشط</SelectItem>
-                <SelectItem value="inactive">غير نشط</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* خطة الاشتراك */}
-          <div className="w-full">
-            <label className="mb-2 block text-sm font-medium text-foreground">
-              خطة الاشتراك
+              {t("status")}{" "}
             </label>
-            <Select className="w-full">
+            <Select
+              className="w-full"
+              value={region}
+              onValueChange={(value) => setRegion(value)}
+            >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="كل الخطط" />
+                <SelectValue placeholder={t("all_cases")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">كل الخطط</SelectItem>
-                <SelectItem value="basic">الباقة الأساسية</SelectItem>
-                <SelectItem value="pro">الباقة المتقدمة</SelectItem>
-                <SelectItem value="premium">الباقة المميزة</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* المدينة */}
-          <div className="w-full">
-            <label className="mb-2 block text-sm font-medium text-foreground">
-              المدينة
-            </label>
-            <Select className="w-full">
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="كل المدن" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">كل المدن</SelectItem>
-                <SelectItem value="cairo">القاهرة</SelectItem>
-                <SelectItem value="giza">الجيزة</SelectItem>
-                <SelectItem value="alex">الإسكندرية</SelectItem>
+                {regionsData.map((region) => (
+                  <SelectItem key={region.id} value={region.id}>
+                    {region.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -168,9 +140,8 @@ const SearchAndFilters = () => {
 
       {/* زر البحث */}
       <div className="mt-4">
-        <Button className="w-full md:w-32 h-10 text-sm">بحث</Button>
+        <Button className="w-full md:w-32 h-10 text-sm">{t("search")}</Button>
       </div>
-
     </div>
   );
 };
