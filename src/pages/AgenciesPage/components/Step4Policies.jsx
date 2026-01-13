@@ -27,7 +27,10 @@ const Step4Policies = () => {
       {/* Terms and Privacy Section */}
       <div className="grid grid-cols-1 gap-6">
         <div className="space-y-3">
-          <Label htmlFor="terms_and_conditions" className="text-base font-semibold">
+          <Label
+            htmlFor="terms_and_conditions"
+            className="text-base font-semibold"
+          >
             {t("Terms and Conditions")}
           </Label>
           <Textarea
@@ -61,6 +64,23 @@ const Step4Policies = () => {
         </div>
       </div>
 
+      <div className="space-y-3 pt-2">
+        <Label htmlFor="cookies_policy" className="text-base font-semibold">
+          {t("Cookies Policy")}
+        </Label>
+        <Textarea
+          id="cookies_policy"
+          {...register("cookies_policy")}
+          placeholder={t("Enter cookies policy...")}
+          className="min-h-[120px] resize-y"
+        />
+        {errors.cookies_policy && (
+          <p className="text-red-500 text-sm mt-1">
+            {t(errors.cookies_policy.message)}
+          </p>
+        )}
+      </div>
+
       {/* FAQs Section */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -88,7 +108,9 @@ const Step4Policies = () => {
                         <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white text-xs font-bold">
                           {index + 1}
                         </div>
-                        <h4 className="font-medium text-gray-900">{t("Frequently Asked Question")}</h4>
+                        <h4 className="font-medium text-gray-900">
+                          {t("Frequently Asked Question")}
+                        </h4>
                       </div>
                       <Button
                         type="button"
@@ -103,8 +125,12 @@ const Step4Policies = () => {
 
                     <div className="grid gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor={`faqs.${index}.question`} className="text-sm font-medium text-gray-700">
-                          {t("Question")} <span className="text-red-500">*</span>
+                        <Label
+                          htmlFor={`faqs.${index}.question`}
+                          className="text-sm font-medium text-gray-700"
+                        >
+                          {t("Question")}{" "}
+                          <span className="text-red-500">*</span>
                         </Label>
                         <Input
                           {...register(`faqs.${index}.question`)}
@@ -112,21 +138,30 @@ const Step4Policies = () => {
                           className="bg-gray-50/50 focus:bg-white transition-colors"
                         />
                         {errors.faqs?.[index]?.question && (
-                          <p className="text-red-500 text-xs mt-1">{t(errors.faqs[index].question.message)}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {t(errors.faqs[index].question.message)}
+                          </p>
                         )}
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor={`faqs.${index}.answer`} className="text-sm font-medium text-gray-700">
+                        <Label
+                          htmlFor={`faqs.${index}.answer`}
+                          className="text-sm font-medium text-gray-700"
+                        >
                           {t("Answer")} <span className="text-red-500">*</span>
                         </Label>
                         <Textarea
                           {...register(`faqs.${index}.answer`)}
-                          placeholder={t("e.g. We are open 9am to 6pm, Monday to Friday...")}
+                          placeholder={t(
+                            "e.g. We are open 9am to 6pm, Monday to Friday..."
+                          )}
                           className="min-h-20 bg-gray-50/50 focus:bg-white transition-colors"
                         />
                         {errors.faqs?.[index]?.answer && (
-                          <p className="text-red-500 text-xs mt-1">{t(errors.faqs[index].answer.message)}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {t(errors.faqs[index].answer.message)}
+                          </p>
                         )}
                       </div>
                     </div>
@@ -149,23 +184,8 @@ const Step4Policies = () => {
         </div>
 
         {errors.faqs && !Array.isArray(errors.faqs) && (
-          <p className="text-red-500 text-sm mt-2 font-medium">{t(errors.faqs.message)}</p>
-        )}
-      </div>
-
-      <div className="space-y-3 pt-2">
-        <Label htmlFor="cookies_policy" className="text-base font-semibold">
-          {t("Cookies Policy")}
-        </Label>
-        <Textarea
-          id="cookies_policy"
-          {...register("cookies_policy")}
-          placeholder={t("Enter cookies policy...")}
-          className="min-h-[120px] resize-y"
-        />
-        {errors.cookies_policy && (
-          <p className="text-red-500 text-sm mt-1">
-            {t(errors.cookies_policy.message)}
+          <p className="text-red-500 text-sm mt-2 font-medium">
+            {t(errors.faqs.message)}
           </p>
         )}
       </div>

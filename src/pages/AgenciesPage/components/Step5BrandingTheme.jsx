@@ -189,10 +189,10 @@ const Step5BrandingTheme = () => {
                   <SelectValue placeholder={t("Select Font")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="cairo">Twentieth Century</SelectItem>
+                  <SelectItem value="Cairo">Cairo</SelectItem>
                   <SelectItem value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</SelectItem>
-                  <SelectItem value="open_sans">Open Sans</SelectItem>
-                  <SelectItem value="tajawal">Tajawal</SelectItem>
+                  <SelectItem value="Open Sans">Open Sans</SelectItem>
+                  <SelectItem value="Tajawal">Tajawal</SelectItem>
                 </SelectContent>
               </Select>
             )}

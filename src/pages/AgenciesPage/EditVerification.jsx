@@ -255,7 +255,11 @@ const EditVerification = () => {
 
             <div className="space-y-2">
               <Label>{t("Verification Expiry")}</Label>
-              <Input type="date" {...register("verification_expiry")} />
+              <Input
+                type="date"
+                {...register("verification_expiry")}
+                min={new Date().toISOString().split("T")[0]}
+              />
               {errors.verification_expiry && (
                 <p className="text-sm text-red-500">
                   {errors.verification_expiry.message}

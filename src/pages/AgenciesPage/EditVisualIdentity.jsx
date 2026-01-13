@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Upload, X, Loader2 } from "lucide-react";
+import { ArrowLeft, Upload, X, Loader2, ChevronDown, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "next-i18next";
 import {
@@ -13,9 +13,69 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+
+// Custom Select Component with shadcn-like styling
+const CustomSelect = ({ value, onChange, options, placeholder, id }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find((opt) => opt.value === value);
+
+  return (
+    <div className="relative" ref={selectRef}>
+      <button
+        type="button"
+        id={id}
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <span className={selectedOption ? "" : "text-muted-foreground"}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <ChevronDown className={`h-4 w-4 opacity-50 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute z-50 mt-1 w-full rounded-md border border-input bg-popover text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95">
+          <div className="max-h-60 overflow-auto p-1">
+            {options.map((option) => (
+              <div
+                key={option.value}
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+                className={`relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground ${value === option.value ? "bg-accent text-accent-foreground" : ""
+                  }`}
+              >
+                {value === option.value && (
+                  <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+                    <Check className="h-4 w-4" />
+                  </span>
+                )}
+                {option.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const EditVisualIdentity = () => {
   const { id } = useParams();
@@ -232,20 +292,28 @@ const EditVisualIdentity = () => {
               </div>
             </div>
 
-            {/* Font and Theme Selects - Regular HTML Select */}
+            {/* Font and Theme Selects - Custom Select */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="font">{t("Font")}</Label>
-                <select
-                  className="w-full h-10 px-3 py-2 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-                  {...register("font")}
-                >
-                  <option value="">{t("Select Font")}</option>
-                  <option value="cairo" >Twentieth Century</option>
-                  <option value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</option>
-                  <option value="open_sans">Open Sans</option>
-                  <option value="tajawal">Tajawal</option>
-                </select>
+                <Controller
+                  name="font"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomSelect
+                      id="font"
+                      value={field.value}
+                      onChange={field.onChange}
+                      options={[
+                        { value: "Cairo", label: "Cairo" },
+                        { value: "IBM Plex Sans Arabic", label: "IBM Plex Sans Arabic" },
+                        { value: "Open Sans", label: "Open Sans" },
+                        { value: "Tajawal", label: "Tajawal" },
+                      ]}
+                      placeholder={t("Select Font")}
+                    />
+                  )}
+                />
                 {errors.font && (
                   <p className="text-sm text-red-500">{errors.font.message}</p>
                 )}
@@ -253,15 +321,22 @@ const EditVisualIdentity = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="theme">{t("Theme")}</Label>
-                <select
-                  className="w-full h-10 px-3 py-2 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-                  {...register("theme")}
-                >
-                  <option value="">{t("Select Theme")}</option>
-                  <option value="light">{t("Light")}</option>
-                  <option value="dark">{t("Dark")}</option>
-                  {/* <option value="system">{t("System")}</option> */}
-                </select>
+                <Controller
+                  name="theme"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomSelect
+                      id="theme"
+                      value={field.value}
+                      onChange={field.onChange}
+                      options={[
+                        { value: "light", label: t("Light") },
+                        { value: "dark", label: t("Dark") },
+                      ]}
+                      placeholder={t("Select Theme")}
+                    />
+                  )}
+                />
                 {errors.theme && (
                   <p className="text-sm text-red-500">{errors.theme.message}</p>
                 )}

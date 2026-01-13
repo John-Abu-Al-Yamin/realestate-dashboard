@@ -142,6 +142,7 @@ const Step3LegalVerification = () => {
           <Input
             id="verification_expiry"
             type="date"
+            min={new Date().toISOString().split("T")[0]}
             {...register("verification_expiry")}
           />
           {errors.verification_expiry && (
@@ -193,9 +194,7 @@ const Step3LegalVerification = () => {
             placeholder={t("Address")}
           />
           {errors.address && (
-            <p className="text-red-500 text-sm">
-              {t(errors.address.message)}
-            </p>
+            <p className="text-red-500 text-sm">{t(errors.address.message)}</p>
           )}
         </div>
       </div>
@@ -357,9 +356,7 @@ const Step3LegalVerification = () => {
 
         {/* Address Attachment */}
         <div className="space-y-2">
-          <Label htmlFor="address_attachment">
-            {t("Address Attachment")}
-          </Label>
+          <Label htmlFor="address_attachment">{t("Address Attachment")}</Label>
           <div className="relative">
             {addressPreview ? (
               <div className="relative border-2 border-dashed border-green-500 rounded-lg p-4 bg-green-50 hover:bg-green-100 transition-colors">
