@@ -143,7 +143,7 @@ const SearchAndFilters = ({ region, setRegion }) => {
         <Button className="w-full md:w-32 h-10 text-sm">{t("search")}</Button>
       </div>
 
-      {(searchValue || region) && (
+      {/* {(searchValue || region) && (
         <div
           className={`overflow-hidden transition-all duration-300 ${
             searchValue || region
@@ -164,7 +164,7 @@ const SearchAndFilters = ({ region, setRegion }) => {
           </button>
           <p className="">حذف البحث </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

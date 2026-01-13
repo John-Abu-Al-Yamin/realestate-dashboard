@@ -504,7 +504,7 @@ const AddAgencies = () => {
             {step === 3 && <Step4Policies />}
             {step === 4 && <Step5BrandingTheme />}
           </div>
-          <div className="flex justify-between pt-4">
+          <div className="flex justify-end pt-4">
             {/* زر السابق */}
             {/* <Button
               type="button"

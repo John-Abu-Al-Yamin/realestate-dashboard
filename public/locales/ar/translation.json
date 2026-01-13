@@ -374,5 +374,7 @@
   "search": "بحث",
   "Search Advanced": "بحث متقدم",
   "search_placeholder": "ابحث بالاسم ...",
-  "Not Found Any Agencies": "لا توجد اي وكالات"
+  "Not Found Any Agencies": "لا توجد اي وكالات",
+  "Invalid email address": "البريد الإلكتروني غير صالح"
+
 }

@@ -454,18 +454,6 @@ const AgencyDetailsPage = () => {
               </div>
 
               <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-                <FileText className="w-5 h-5 text-gray-400" />
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {isRTL ? "المرفق" : "Attachment"}
-                  </p>
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                    {profileData.attachment}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
                 <Calendar className="w-5 h-5 text-gray-400" />
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -490,6 +478,24 @@ const AgencyDetailsPage = () => {
                       "ar-EG"
                     )}
                   </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg my-4">
+              <div  className="w-full flex flex-col">
+                {/* Label فوق الـ box */}
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  {isRTL ? "المرفق" : "Attachment"}
+                </p>
+
+                {/* Box الصورة */}
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-2 bg-gray-50 hover:bg-gray-100 transition-colors">
+                  <img
+                    src={profileData.attachment}
+                    alt="Attachment"
+                    className="w-full h-48 object-contain rounded-md"
+                  />
                 </div>
               </div>
             </div>
