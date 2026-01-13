@@ -1,4 +1,4 @@
-import { Mic, Search } from "lucide-react";
+import { Mic, OctagonX, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -142,6 +142,29 @@ const SearchAndFilters = ({ region, setRegion }) => {
       <div className="mt-4">
         <Button className="w-full md:w-32 h-10 text-sm">{t("search")}</Button>
       </div>
+
+      {(searchValue || region) && (
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            searchValue || region
+              ? "max-h-20 opacity-100 mt-4"
+              : "max-h-0 opacity-0"
+          } bg-gray-100 px-4 rounded-md p-2 flex items-center justify-between gap-2`}
+        >
+         
+          <button
+            type="button"
+            onClick={() => {
+              setSearchValue("");
+              setRegion(null);
+            }}
+            className="cursor-pointer"
+          >
+            <OctagonX className="h-5 w-5" />
+          </button>
+          <p className="">حذف البحث </p>
+        </div>
+      )}
     </div>
   );
 };
