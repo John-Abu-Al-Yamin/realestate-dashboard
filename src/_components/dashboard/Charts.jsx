@@ -8,12 +8,12 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
+  AreaChart,
+  Area,
   Bar,
   ComposedChart,
 } from "recharts";
+import { useTranslation } from "next-i18next";
 
 const growthData = [
   { name: "يناير", الاشتراكات: 12, الوكالات: 8 },
@@ -30,13 +30,6 @@ const growthData = [
   { name: "ديسمبر", الاشتراكات: 70, الوكالات: 63 },
 ];
 
-const propertiesData = [
-  { name: "سكني", value: 60 },
-  { name: "تجاري", value: 30 },
-  { name: "أراضي", value: 10 },
-];
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
-
 const revenueData = [
   { name: "يناير", الإيرادات: 1200 },
   { name: "فبراير", الإيرادات: 1500 },
@@ -51,80 +44,122 @@ const revenueData = [
   { name: "نوفمبر", الإيرادات: 3800 },
   { name: "ديسمبر", الإيرادات: 4000 },
 ];
-import { useTranslation } from "next-i18next";
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-popover text-popover-foreground p-3 rounded-lg shadow-lg border border-border text-sm">
+        <p className="font-bold mb-1">{label}</p>
+        {payload.map((entry, index) => (
+          <p key={index} style={{ color: entry.color }}>
+            {entry.name}: {entry.value}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
 
 const Charts = () => {
+  const { t } = useTranslation();
 
-    return (
-    <div className="grid gap-6  md:grid-cols-3 overflow-hidden" dir="ltr">
-      <div className="w-full h-[400px] p-4 ">
-        <h3 className="text-lg font-medium mb-4">
-          نمو الاشتراكات والوكالات الشهرية
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Growth Chart */}
+      <div className="bg-card text-card-foreground p-6 rounded-xl shadow-sm border border-border">
+        <h3 className="text-xl font-bold mb-6 text-foreground">
+          {t("growth_analytics", "تحليلات النمو")}
         </h3>
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            data={growthData}
-            margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="الاشتراكات"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-            />
-            <Line type="monotone" dataKey="الوكالات" stroke="#82ca9d" />
-          </LineChart>
-        </ResponsiveContainer>
+        <div className="h-[300px] w-full" dir="ltr">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart data={growthData}>
+              <defs>
+                <linearGradient id="colorSubscriptions" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.1} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+              <XAxis
+                dataKey="name"
+                stroke="hsl(var(--muted-foreground))"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                stroke="hsl(var(--muted-foreground))"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(value) => `${value}`}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend wrapperStyle={{ paddingTop: "20px" }} />
+              <Bar
+                dataKey="الاشتراكات"
+                name="الاشتراكات"
+                fill="url(#colorSubscriptions)"
+                barSize={20}
+                radius={[4, 4, 0, 0]}
+              />
+              <Line
+                type="monotone"
+                dataKey="الوكالات"
+                name="الوكالات"
+                stroke="#10b981"
+                strokeWidth={3}
+                dot={{ stroke: "#10b981", strokeWidth: 2, r: 4, fill: "hsl(var(--card))" }}
+                activeDot={{ r: 6 }}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
-      <div className="w-full h-[400px] p-4 ">
-        <h3 className="text-lg font-medium mb-4">توزيع العقارات حسب النوع</h3>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={propertiesData}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={120}
-              fill="#8884d8"
-              label
-            >
-              {propertiesData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="w-full h-[400px] p-4 ">
-        <h3 className="text-lg font-medium mb-4">الإيرادات الشهرية</h3>
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart
-            data={revenueData}
-            margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="الإيرادات" barSize={30} fill="#82ca9d" />
-            <Line type="monotone" dataKey="الإيرادات" stroke="#8884d8" />
-          </ComposedChart>
-        </ResponsiveContainer>
+      {/* Revenue Chart */}
+      <div className="bg-card text-card-foreground p-6 rounded-xl shadow-sm border border-border">
+        <h3 className="text-xl font-bold mb-6 text-foreground">
+          {t("revenue_trends", "اتجاهات الإيرادات")}
+        </h3>
+        <div className="h-[300px] w-full" dir="ltr">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={revenueData}>
+              <defs>
+                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+              <XAxis
+                dataKey="name"
+                stroke="hsl(var(--muted-foreground))"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                stroke="hsl(var(--muted-foreground))"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(value) => `$${value}`}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Area
+                type="monotone"
+                dataKey="الإيرادات"
+                name="الإيرادات"
+                stroke="#8b5cf6"
+                strokeWidth={3}
+                fillOpacity={1}
+                fill="url(#colorRevenue)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
