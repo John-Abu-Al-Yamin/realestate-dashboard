@@ -18,9 +18,9 @@ const Dashboard = () => {
       <div className="mt-6">
         <StatsCards statistics={statistics} />
       </div>
-      <div className="mt-6  ">
+      {/* <div className="mt-6  ">
         <Charts />
-      </div>
+      </div> */}
       <div className="mt-6">
         <RecentActivities />
       </div>

@@ -12,6 +12,11 @@ import {
   X,
   ChevronUp,
   LogOut,
+  MapPin,
+  ChevronDown,
+  Map,
+  Building2,
+  MapPinned,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../LanguageSwitcher";
@@ -23,6 +28,7 @@ const SidebarMobile = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isAddressOpen, setIsAddressOpen] = useState(false);
   const navigate = useNavigate();
 
   const navItems = [
@@ -51,10 +57,9 @@ const SidebarMobile = () => {
         to={item.href}
         onClick={() => setIsExpanded(false)}
         className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-300
-          ${
-            isActive
-              ? "bg-black dark:bg-white text-white dark:text-black shadow-md scale-[1.02]"
-              : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
+          ${isActive
+            ? "bg-black dark:bg-white text-white dark:text-black shadow-md scale-[1.02]"
+            : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
           }`}
       >
         <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.5} />
@@ -81,10 +86,9 @@ const SidebarMobile = () => {
               key={item.href}
               to={item.href}
               className={`flex items-center justify-center p-2 rounded-lg transition-all duration-300
-                ${
-                  isActive
-                    ? "bg-black dark:bg-white text-white dark:text-black px-3"
-                    : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
+                ${isActive
+                  ? "bg-black dark:bg-white text-white dark:text-black px-3"
+                  : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               onClick={() => setIsExpanded(false)}
             >
@@ -104,10 +108,9 @@ const SidebarMobile = () => {
         <button
           onClick={handleExpand}
           className={`flex items-center justify-center p-2 rounded-lg transition-all duration-300
-            ${
-              isExpanded
-                ? "bg-black dark:bg-white text-white dark:text-black px-3"
-                : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
+            ${isExpanded
+              ? "bg-black dark:bg-white text-white dark:text-black px-3"
+              : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
             }`}
         >
           <ChevronUp
@@ -125,10 +128,9 @@ const SidebarMobile = () => {
       {/* Bottom Drawer Menu */}
       <div
         className={`fixed inset-0 z-50 md:hidden transition-all duration-500
-          ${
-            isExpanded
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
+          ${isExpanded
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
           }`}
       >
         <div
@@ -138,8 +140,7 @@ const SidebarMobile = () => {
 
         <div
           className={`absolute bottom-0 left-0 right-0 bg-white dark:bg-[#1F1F23] rounded-t-3xl shadow-2xl border-t
-            transition-transform duration-500 ${
-              isExpanded ? "translate-y-0" : "translate-y-full"
+            transition-transform duration-500 ${isExpanded ? "translate-y-0" : "translate-y-full"
             }`}
         >
           <div className="flex justify-center pt-3 pb-2">
@@ -159,6 +160,71 @@ const SidebarMobile = () => {
 
           <div className="max-h-[70vh] overflow-y-auto pb-4 px-4 space-y-2">
             {navItems.map(renderNavLink)}
+
+            {/* Address Menu */}
+            <div>
+              <button
+                onClick={() => setIsAddressOpen((prev) => !prev)}
+                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-300 w-full
+                  text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700`}
+              >
+                <MapPin className="h-[18px] w-[18px] shrink-0" strokeWidth={1.5} />
+                <span className="font-medium whitespace-nowrap flex-1 text-start">
+                  {t("sidebar.Address")}
+                </span>
+                <ChevronDown
+                  className={`transition-transform duration-300 h-4 w-4 ${isAddressOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                />
+              </button>
+
+              <div
+                className={`pl-8 flex flex-col space-y-1 overflow-hidden transition-all duration-300
+                  ${isAddressOpen ? "max-h-40 mt-1" : "max-h-0"}`}
+              >
+                <NavLink
+                  to="/address/regions"
+                  onClick={() => setIsExpanded(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${isActive
+                      ? "bg-black text-white"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    }`
+                  }
+                >
+                  <Map className="h-4 w-4" strokeWidth={1.5} />
+                  {t("sidebar.regions")}
+                </NavLink>
+
+                <NavLink
+                  to="/address/cities"
+                  onClick={() => setIsExpanded(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${isActive
+                      ? "bg-black text-white"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    }`
+                  }
+                >
+                  <Building2 className="h-4 w-4" strokeWidth={1.5} />
+                  {t("sidebar.cities")}
+                </NavLink>
+
+                <NavLink
+                  to="/address/branches"
+                  onClick={() => setIsExpanded(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${isActive
+                      ? "bg-black text-white"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    }`
+                  }
+                >
+                  <MapPinned className="h-4 w-4" strokeWidth={1.5} />
+                  {t("sidebar.branches")}
+                </NavLink>
+              </div>
+            </div>
 
             {/* Language Switcher */}
             <div className="mt-4">

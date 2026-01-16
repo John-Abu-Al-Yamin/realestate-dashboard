@@ -10,78 +10,83 @@ import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 
 // Lazy load page components
 const LoginForm = lazy(() => import("@/pages/auth/LoginForm"));
-const ForgotPasswordForm = lazy(() =>
-  import("@/pages/auth/ForgotPasswordForm")
+const ForgotPasswordForm = lazy(
+  () => import("@/pages/auth/ForgotPasswordForm"),
 );
-const OtpVerificationForm = lazy(() =>
-  import("@/pages/auth/OtpVerificationForm")
+const OtpVerificationForm = lazy(
+  () => import("@/pages/auth/OtpVerificationForm"),
 );
 const ResetPasswordForm = lazy(() => import("@/pages/auth/ResetPasswordForm"));
 const Dashboard = lazy(() => import("@/pages/dashboard/Dashboard"));
 const AgenciesPage = lazy(() => import("@/pages/AgenciesPage/AgenciesPage"));
-const AgencyDetailsPage = lazy(() =>
-  import("@/pages/AgenciesPage/AgencyDetailsPage")
+const AgencyDetailsPage = lazy(
+  () => import("@/pages/AgenciesPage/AgencyDetailsPage"),
 );
 const AddAgencies = lazy(() => import("@/pages/AgenciesPage/AddAgencies"));
-const SelectManager = lazy(() =>
-  import("@/pages/AgenciesPage/SelectManager/SelectManager")
+const SelectManager = lazy(
+  () => import("@/pages/AgenciesPage/SelectManager/SelectManager"),
 );
-const EditMasterData = lazy(() =>
-  import("@/pages/AgenciesPage/EditMasterData")
+const EditMasterData = lazy(
+  () => import("@/pages/AgenciesPage/EditMasterData"),
 );
-const EditVerification = lazy(() =>
-  import("@/pages/AgenciesPage/EditVerification")
+const EditVerification = lazy(
+  () => import("@/pages/AgenciesPage/EditVerification"),
 );
 const EditLegal = lazy(() => import("@/pages/AgenciesPage/EditLegal"));
-const EditVisualIdentity = lazy(() =>
-  import("@/pages/AgenciesPage/EditVisualIdentity")
+const EditVisualIdentity = lazy(
+  () => import("@/pages/AgenciesPage/EditVisualIdentity"),
 );
 const ManagersPage = lazy(() => import("@/pages/ManagersPage/ManagersPage"));
-const ManagersPageDetalis = lazy(() =>
-  import("@/pages/ManagersPage/ManagersPageDetalis")
+const ManagersPageDetalis = lazy(
+  () => import("@/pages/ManagersPage/ManagersPageDetalis"),
 );
 const ManagersEdite = lazy(() => import("@/pages/ManagersPage/ManagersEdite"));
 const AddManager = lazy(() => import("@/pages/ManagersPage/AddManager"));
 
-const SubscriptionPlansPage = lazy(() =>
-  import("@/pages/SubscriptionPlans/SubscriptionPlansPage")
+const SubscriptionPlansPage = lazy(
+  () => import("@/pages/SubscriptionPlans/SubscriptionPlansPage"),
 );
-const SubscriptionPlanDetalis = lazy(() =>
-  import("@/pages/SubscriptionPlans/SubscriptionPlanDetalis")
+const SubscriptionPlanDetalis = lazy(
+  () => import("@/pages/SubscriptionPlans/SubscriptionPlanDetalis"),
 );
-const AddSubscriptionPlan = lazy(() =>
-  import("@/pages/SubscriptionPlans/AddSubscriptionPlan")
-);
-
-const SubscriptionPlansEdite = lazy(() =>
-  import("@/pages/SubscriptionPlans/SubscriptionPlansEdite")
+const AddSubscriptionPlan = lazy(
+  () => import("@/pages/SubscriptionPlans/AddSubscriptionPlan"),
 );
 
-const SubscriptionsPage = lazy(() =>
-  import("@/pages/Subscriptions/SubscriptionsPage")
+const SubscriptionPlansEdite = lazy(
+  () => import("@/pages/SubscriptionPlans/SubscriptionPlansEdite"),
 );
-const SubscriptionsDetalis = lazy(() =>
-  import("@/pages/Subscriptions/SubscriptionsDetalis")
+
+const SubscriptionsPage = lazy(
+  () => import("@/pages/Subscriptions/SubscriptionsPage"),
 );
-const AddSubscriptions = lazy(() =>
-  import("@/pages/Subscriptions/AddSubscriptions")
+const SubscriptionsDetalis = lazy(
+  () => import("@/pages/Subscriptions/SubscriptionsDetalis"),
+);
+const AddSubscriptions = lazy(
+  () => import("@/pages/Subscriptions/AddSubscriptions"),
 );
 const EditProfile = lazy(() => import("@/pages/AgenciesPage/EditProfile"));
-const SubscriptionEdite = lazy(() =>
-  import("@/pages/Subscriptions/SubscriptionEdite")
+const SubscriptionEdite = lazy(
+  () => import("@/pages/Subscriptions/SubscriptionEdite"),
 );
-const ActivityLogPage = lazy(() =>
-  import("@/pages/ActivityLogPage/ActivityLogPage")
-);
-
-const ActivityLogPageDetalis = lazy(() =>
-  import("@/pages/ActivityLogPage/ActivityLogPageDetalis")
+const ActivityLogPage = lazy(
+  () => import("@/pages/ActivityLogPage/ActivityLogPage"),
 );
 
-const EditeMangerAgancey = lazy(() =>
-  import("@/pages/AgenciesPage/SelectManager/EditeMangerAgancey")
+const ActivityLogPageDetalis = lazy(
+  () => import("@/pages/ActivityLogPage/ActivityLogPageDetalis"),
 );
 
+const EditeMangerAgancey = lazy(
+  () => import("@/pages/AgenciesPage/SelectManager/EditeMangerAgancey"),
+);
+const SocialLinks = lazy(() => import("@/pages/SocialLinks/SocialLinks"));
+
+const Regions = lazy(() => import("@/pages/Address/Regions"));
+const Cities = lazy(() => import("@/pages/Address/Cities"));
+const Branches = lazy(() => import("@/pages/Address/Branches"));
+const ArchivePage = lazy(() => import("@/pages/Archive/ArchivePage"));
 
 // Loading component
 const LoadingFallback = () => (
@@ -158,7 +163,7 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      
+
       {
         path: "agencies/edit-manager/:id",
         element: (
@@ -321,6 +326,49 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <ActivityLogPageDetalis />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "address/regions",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Regions />
+          </Suspense>
+        ),
+      },
+      {
+        path: "address/cities",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Cities />
+          </Suspense>
+        ),
+      },
+      {
+        path: "address/branches",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Branches />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "social-links",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <SocialLinks />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: "archive",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ArchivePage />
           </Suspense>
         ),
       },

@@ -7,7 +7,7 @@
     "subscriptions_list": "List of subscriptions",
     "subscription Plans": "Subscriptions Plans",
     "subscriptions": "Subscriptions",
-
+    "social links": "Social Links",
     "mangers": "Managers",
     "reports": "Reports",
     "leads": "Leads",
@@ -15,7 +15,12 @@
     "settings": "Settings",
     "pro": "Pro",
     "menu": "Menu",
-    "logout": "Logout"
+    "logout": "Logout",
+    "Address": "Address",
+    "regions": "Regions",
+    "cities": "Cities",
+    "branches": "Branches",
+    "Archive": "Archive"
   },
 
   "login": {
@@ -380,5 +385,6 @@
   "Search Advanced": "Search Advanced",
   "search_placeholder": "Search by name ",
   "Not Found Any Agencies": "Not Found Any Agencies",
-  "Invalid email address": "Invalid email address"
+  "Invalid email address": "Invalid email address",
+  "Archive": "Archive"
 }

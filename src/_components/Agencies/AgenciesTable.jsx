@@ -9,6 +9,7 @@ import {
   X,
   Info,
   UserPen,
+  ArchiveRestore,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -40,11 +41,12 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
     t("ID"),
     t("Manager ID"),
     t("Setup Status"),
-    t("Legal"),
     t("Master Data"),
     t("Profile"),
     t("Verification"),
+    t("Legal"),
     t("Visual Identity"),
+    t("Logo"),
     t("Created At"),
     t("Updated At"),
     t("Actions"),
@@ -145,8 +147,12 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                         isRTL ? "text-right" : "text-left"
                       }`}
                     >
-                      <span className="font-medium">{row.id}</span>
+                      <div className="font-medium">#{row.id}</div>
+                      <div className="text-gray-700 text-sm">
+                        {row?.master_data?.brand_name || "-"}
+                      </div>
                     </td>
+
                     <td
                       className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
                         isRTL ? "text-right" : "text-left"
@@ -166,22 +172,12 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                           row.setup_status === "complete"
                             ? "bg-green-100 text-green-800 border-green-300 hover:bg-green-200 text-xs"
                             : row.setup_status === "incomplete"
-                            ? "bg-yellow-100 text-yellow-800 border-yellow-300 hover:bg-yellow-200 text-xs"
-                            : "bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200 text-xs"
+                              ? "bg-yellow-100 text-yellow-800 border-yellow-300 hover:bg-yellow-200 text-xs"
+                              : "bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200 text-xs"
                         }
                       >
                         {t(row.setup_status)}
                       </Badge>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        {renderBoolean(row.setup_steps?.legal)}
-                        {row.legal && renderLegal(row.legal)}
-                      </div>
                     </td>
                     <td
                       className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
@@ -233,17 +229,50 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                       }`}
                     >
                       <div className="flex items-center gap-2">
+                        {renderBoolean(row.setup_steps?.legal)}
+                        {row.legal && renderLegal(row.legal)}
+                      </div>
+                    </td>
+                    <td
+                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
                         {renderBoolean(row.setup_steps?.visual_identity)}
                         {row.visual_identity && (
-                          <Badge
-                            variant="outline"
-                            className="bg-pink-50 text-xs"
-                          >
-                            {t("Identity")}
-                          </Badge>
+                          <div className="flex items-center gap-2">
+                            <Badge
+                              variant="outline"
+                              className="bg-pink-50 text-xs"
+                            >
+                              {t("Identity")}
+                            </Badge>
+                          </div>
                         )}
                       </div>
                     </td>
+
+                    <td
+                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        {row.visual_identity && (
+                          <div className="flex items-center gap-2">
+                            {row.visual_identity.logo && (
+                              <img
+                                src={row.visual_identity.logo}
+                                alt="Logo"
+                                className="h-8 w-8 object-contain rounded border border-gray-200"
+                              />
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </td>
+
                     <td
                       className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
                         isRTL ? "text-right" : "text-left"
@@ -274,51 +303,109 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="h-8 w-8 hover:bg-gray-100 "
+                              className="h-8 w-8 hover:bg-gray-100"
                             >
                               <SquarePen className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
 
                           <DropdownMenuContent align={isRTL ? "start" : "end"}>
+                            {/* View Details */}
                             <DropdownMenuItem
                               onClick={() => navigate(`/agencies/${row.id}`)}
+                              className="flex items-center"
                             >
-                              <Eye className="mr-2 h-4 w-4" />
-                              {t("View Details")}
+                              {isRTL ? (
+                                <>
+                                  {t("View Details")}
+                                  <Eye className="ml-2 h-4 w-4" />
+                                </>
+                              ) : (
+                                <>
+                                  <Eye className="mr-2 h-4 w-4" />
+                                  {t("View Details")}
+                                </>
+                              )}
                             </DropdownMenuItem>
 
+                            {/* Edit Manager */}
                             <DropdownMenuItem
                               onClick={() =>
                                 navigate(
                                   `/agencies/edit-manager/${row.manager_id}`,
                                   {
-                                    state: {
-                                      agencyId: row.id,
-                                    },
-                                  }
+                                    state: { agencyId: row.id },
+                                  },
                                 )
                               }
+                              className="flex items-center"
                             >
-                              <UserPen className="mr-2 h-4 w-4" />
-                              {t("Edit Manager")}
+                              {isRTL ? (
+                                <>
+                                  {t("Edit Manager")}
+                                  <UserPen className="ml-2 h-4 w-4" />
+                                </>
+                              ) : (
+                                <>
+                                  <UserPen className="mr-2 h-4 w-4" />
+                                  {t("Edit Manager")}
+                                </>
+                              )}
                             </DropdownMenuItem>
 
+                            {/* Edit */}
                             <DropdownMenuItem
                               onClick={() => navigate(`/agencies/${row.id}`)}
+                              className="flex items-center"
                             >
-                              <Pencil className="mr-2 h-4 w-4" />
-                              {t("Edit")}
+                              {isRTL ? (
+                                <>
+                                  {t("Edit")}
+                                  <Pencil className="ml-2 h-4 w-4" />
+                                </>
+                              ) : (
+                                <>
+                                  <Pencil className="mr-2 h-4 w-4" />
+                                  {t("Edit")}
+                                </>
+                              )}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => navigate(`/agencies/${row.id}`)}
+                              className="flex items-center"
+                            >
+                              {isRTL ? (
+                                <>
+                                  {t("Archive")}
+                                  <ArchiveRestore  className="ml-2 h-4 w-4" />
+                                </>
+                              ) : (
+                                <>
+                                  <ArchiveRestore  className="mr-2 h-4 w-4" />
+                                  {t("Archive")}
+                                </>
+                              )}
                             </DropdownMenuItem>
 
-                            {/* 
-                            <DropdownMenuItem
-                              className="text-red-600"
-                              onClick={() => handleDelete(row)}
-                            >
-                              <Trash2 className="mr-2 h-4 w-4" />
-                              {t("Delete")}
-                            </DropdownMenuItem> */}
+                            {/* Delete (commented out) */}
+                            {/*
+    <DropdownMenuItem
+      className={`flex items-center text-red-600`}
+      onClick={() => handleDelete(row)}
+    >
+      {isRTL ? (
+        <>
+          {t("Delete")}
+          <Trash2 className="ml-2 h-4 w-4" />
+        </>
+      ) : (
+        <>
+          <Trash2 className="mr-2 h-4 w-4" />
+          {t("Delete")}
+        </>
+      )}
+    </DropdownMenuItem>
+    */}
                           </DropdownMenuContent>
                         </DropdownMenu>
 
@@ -375,7 +462,7 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                       {p}
                     </PaginationLink>
                   </PaginationItem>
-                )
+                ),
               )}
 
               {/* Next */}

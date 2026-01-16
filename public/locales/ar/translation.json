@@ -14,7 +14,13 @@
     "settings": "الإعدادات",
     "pro": "برو",
     "menu": "القائمة",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "social links": "التواصل الاجتماعي",
+    "Address": "العنوان",
+    "regions": "المناطق",
+    "cities": "المدن",
+    "branches": "الحي",
+    "Archive": "الأرشيف"
   },
   "login": {
     "welcomeBack": "مرحباً بك مجدداً",
@@ -375,6 +381,6 @@
   "Search Advanced": "بحث متقدم",
   "search_placeholder": "ابحث بالاسم ...",
   "Not Found Any Agencies": "لا توجد اي وكالات",
-  "Invalid email address": "البريد الإلكتروني غير صالح"
-
+  "Invalid email address": "البريد الإلكتروني غير صالح",
+  "Archive": "أرشيف"
 }
