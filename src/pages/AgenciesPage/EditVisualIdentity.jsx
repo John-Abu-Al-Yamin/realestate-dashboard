@@ -309,6 +309,12 @@ const EditVisualIdentity = () => {
                         { value: "IBM Plex Sans Arabic", label: "IBM Plex Sans Arabic" },
                         { value: "Open Sans", label: "Open Sans" },
                         { value: "Tajawal", label: "Tajawal" },
+                        { value: "Almarai", label: "Almarai" },
+                        { value: "Noto Kufi Arabic", label: "Noto Kufi Arabic" },
+                        { value: "Cairo Play", label: "Cairo Play" },
+                        { value: "Rubik", label: "Rubik" },
+                        { value: "El Messiri", label: "El Messiri" },
+                        { value: "Readex Pro", label: "Readex Pro" },
                       ]}
                       placeholder={t("Select Font")}
                     />

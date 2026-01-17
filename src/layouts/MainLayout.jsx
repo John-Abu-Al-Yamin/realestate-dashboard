@@ -25,7 +25,7 @@ const MainLayout = () => {
       <div
         className={`
     flex-1 transition-all duration-300
-    pb-[90px] md:pb-0
+    pb-[90px] md:pb-0 
     ${
       isOpen
         ? i18n.language === "ar"

@@ -190,9 +190,42 @@ const Step5BrandingTheme = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Cairo">Cairo</SelectItem>
-                  <SelectItem value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</SelectItem>
+                  <SelectItem value="IBM Plex Sans Arabic">
+                    IBM Plex Sans Arabic
+                  </SelectItem>
                   <SelectItem value="Open Sans">Open Sans</SelectItem>
                   <SelectItem value="Tajawal">Tajawal</SelectItem>
+                  <SelectItem
+                    value="Almarai
+"
+                  >
+                    Almarai
+                  </SelectItem>
+                  <SelectItem
+                    value="Noto Kufi Arabic
+"
+                  >
+                    Noto Kufi Arabic
+                  </SelectItem>
+                  <SelectItem
+                    value="Cairo Play
+"
+                  >
+                    Cairo Play
+                  </SelectItem>
+                  <SelectItem value="Rubik">Rubik</SelectItem>
+                  <SelectItem
+                    value="El Messiri
+"
+                  >
+                    El Messiri
+                  </SelectItem>
+                  <SelectItem
+                    value="Readex Pro
+"
+                  >
+                    Readex Pro
+                  </SelectItem>
                 </SelectContent>
               </Select>
             )}

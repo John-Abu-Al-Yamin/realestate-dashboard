@@ -122,7 +122,7 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px] border-collapse">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50/50 hover:bg-gray-50">
+              <tr className="border-b border-gray-100 bg-gray-100 hover:bg-gray-50">
                 {headers.map((header, index) => (
                   <th
                     key={index}

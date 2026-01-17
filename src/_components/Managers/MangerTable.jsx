@@ -78,7 +78,7 @@ const MangerTable = ({ managers, isPending, page, setPage }) => {
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center">
-                      <User className="h-4 w-4 text-muted-foreground" />
+                      <User className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <span>
                       {manager.first_name} {manager.second_name}{" "}
@@ -159,7 +159,7 @@ const MangerTable = ({ managers, isPending, page, setPage }) => {
                       {p}
                     </PaginationLink>
                   </PaginationItem>
-                )
+                ),
               )}
 
               {/* Next */}

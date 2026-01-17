@@ -1,7 +1,7 @@
-
-
-import { useState } from "react"
-import { Home, Edit, CheckCircle, XCircle, Activity, Zap } from "lucide-react"
+import { useState } from "react";
+import { Home, Edit, CheckCircle, XCircle, Activity, Zap } from "lucide-react";
+import { useTranslation } from "next-i18next";
+import { useNavigate } from "react-router-dom";
 
 const transactions = [
   {
@@ -44,67 +44,75 @@ const transactions = [
     type: "add",
     description: "عقار تجاري في منطقة الجيزة",
   },
-]
+];
 
 const getTypeColor = (type) => {
   switch (type) {
     case "add":
-      return "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800"
+      return "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800";
     case "edit":
-      return "bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400 border border-amber-200 dark:border-amber-800"
+      return "bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400 border border-amber-200 dark:border-amber-800";
     case "approval":
-      return "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400 border border-green-200 dark:border-green-800"
+      return "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400 border border-green-200 dark:border-green-800";
     case "reject":
-      return "bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400 border border-red-200 dark:border-red-800"
+      return "bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400 border border-red-200 dark:border-red-800";
     default:
-      return "bg-gray-500/10 text-gray-600 dark:bg-gray-500/20 dark:text-gray-400 border border-gray-200 dark:border-gray-800"
+      return "bg-gray-500/10 text-gray-600 dark:bg-gray-500/20 dark:text-gray-400 border border-gray-200 dark:border-gray-800";
   }
-}
+};
 
 const getIconBgColor = (type) => {
   switch (type) {
     case "add":
-      return "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400"
+      return "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400";
     case "edit":
-      return "bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400"
+      return "bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400";
     case "approval":
-      return "bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400"
+      return "bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400";
     case "reject":
-      return "bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400"
+      return "bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400";
     default:
-      return "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+      return "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400";
   }
-}
+};
 
 const getTypeLabel = (type) => {
   switch (type) {
     case "add":
-      return "إضافة"
+      return "إضافة";
     case "edit":
-      return "تعديل"
+      return "تعديل";
     case "approval":
-      return "موافقة"
+      return "موافقة";
     case "reject":
-      return "رفض"
+      return "رفض";
     default:
-      return type
+      return type;
   }
-}
+};
 
 const RecentActivities = () => {
-  const [expandedId, setExpandedId] = useState(null)
+  const [expandedId, setExpandedId] = useState(null);
+
+  // const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="rounded-2xl bg-card dark:bg-card mt-6 p-6 ">
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-yellow-400 to-yellow-500 text-white">
+          {/* <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-yellow-400 to-yellow-500 text-white">
             <Activity className="h-5 w-5" />
-          </div>
+          </div> */}
           <div>
-            <h3 className="text-2xl font-bold text-foreground dark:text-foreground">آخر العمليات</h3>
+            <h3 className="text-2xl font-bold text-foreground dark:text-foreground">
+              {t("Recent Activities", "النشاطات الأخيرة")}
+            </h3>
             <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-0.5">
-              تابع جميع التحديثات والأنشطة
+              {t(
+                "recent_activities_description",
+                "عرض لأحدث النشاطات التي تمت على الوكالات",
+              )}
             </p>
           </div>
         </div>
@@ -116,14 +124,14 @@ const RecentActivities = () => {
 
       <div className="space-y-3">
         {transactions.map((transaction) => {
-          const IconComponent = transaction.icon
-          const isExpanded = expandedId === transaction.id
+          const IconComponent = transaction.icon;
+          const isExpanded = expandedId === transaction.id;
 
           return (
             <div
               key={transaction.id}
               onClick={() => setExpandedId(isExpanded ? null : transaction.id)}
-              className="group flex flex-col gap-4 rounded-xl border border-border/50 dark:border-border/50 bg-white/50 dark:bg-white/5 p-4 transition-all duration-200 hover:bg-white/80 dark:hover:bg-white/10 hover:border-border dark:hover:border-border hover:shadow-sm cursor-pointer"
+              className="group flex flex-col gap-4 rounded-xl   bg-gray-50 dark:bg-white/5 p-4 transition-all duration-200 hover:bg-gray-100 dark:hover:bg-white/10 hover:border-border dark:hover:border-border  cursor-pointer"
             >
               <div className="flex w-full items-start gap-4">
                 <div
@@ -140,45 +148,43 @@ const RecentActivities = () => {
                       <p className="font-semibold text-foreground dark:text-foreground text-sm md:text-base leading-snug">
                         {transaction.name}
                       </p>
+                      <p className="text-sm text-gray-900 dark:text-muted-foreground leading-relaxed">
+                        {transaction.description}
+                      </p>
                     </div>
-                    <span
-                      className={`shrink-0 text-xs font-medium px-2.5 py-1 rounded-lg whitespace-nowrap ${getTypeColor(
-                        transaction.type,
-                      )}`}
-                    >
-                      {getTypeLabel(transaction.type)}
-                    </span>
-                  </div>
 
-                  <div className="flex items-center justify-between mt-1">
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground font-medium">
                       {transaction.date}
                     </p>
-                    <span className="text-xs text-muted-foreground/50 dark:text-muted-foreground/50 group-hover:text-muted-foreground dark:group-hover:text-muted-foreground transition-colors">
+                  </div>
+
+                  <div className="flex items-center justify-between mt-1">
+                    {/* <p className="text-xs text-muted-foreground dark:text-muted-foreground font-medium">
+                      {transaction.date}
+                    </p> */}
+                    {/* <span className="text-xs text-muted-foreground/50 dark:text-muted-foreground/50 group-hover:text-muted-foreground dark:group-hover:text-muted-foreground transition-colors">
                       {isExpanded ? "▼" : "▶"}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
               </div>
-<div
-  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-    isExpanded
-      ? "max-h-40 mt-2 pl-16 border-t border-border/30 dark:border-border/30 pt-3"
-      : "max-h-0 mt-0 pl-16 border-0 pt-0"
-  }`}
->
-  <p className="text-sm text-muted-foreground dark:text-muted-foreground leading-relaxed">
-    {transaction.description}
-  </p>
-</div>
-
+              {/* <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  isExpanded
+                    ? "max-h-40 mt-2 pl-16 border-t border-border/30 dark:border-border/30 pt-3"
+                    : "max-h-0 mt-0 pl-16 border-0 pt-0"
+                }`}
+              >
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground leading-relaxed">
+                  {transaction.description}
+                </p>
+              </div> */}
             </div>
-          )
+          );
         })}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default RecentActivities
+export default RecentActivities;
