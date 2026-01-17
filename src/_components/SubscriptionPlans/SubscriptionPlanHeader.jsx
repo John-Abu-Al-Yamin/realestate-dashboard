@@ -18,7 +18,7 @@ const SubscriptionPlanHeader = () => {
         </p>
       </div>
       <Button
-        className="flex items-center gap-2 bg-primary cursor-pointer hover:bg-primary/90"
+        className="flex items-center gap-2 bg-primary cursor-pointer hover:bg-primary/90 md:w-32 h-10"
         onClick={() => navigate("/subscription-plans/add")}
       >
         <Plus className="h-4 w-4" />

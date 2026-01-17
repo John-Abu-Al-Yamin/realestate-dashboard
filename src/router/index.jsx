@@ -7,6 +7,8 @@ import AuthLayout from "@/layouts/AuthLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
+import AddCountry from "@/pages/Address/Countries/AddCountry";
+import EditeCountry from "@/pages/Address/Countries/EditeCountry";
 
 // Lazy load page components
 const LoginForm = lazy(() => import("@/pages/auth/LoginForm"));
@@ -83,10 +85,10 @@ const EditeMangerAgancey = lazy(
 );
 const SocialLinks = lazy(() => import("@/pages/SocialLinks/SocialLinks"));
 
-const Regions = lazy(() => import("@/pages/Address/Regions"));
-const Cities = lazy(() => import("@/pages/Address/Cities"));
-const Branches = lazy(() => import("@/pages/Address/Branches"));
-const Countries = lazy(() => import("@/pages/Address/Countries"));
+const Regions = lazy(() => import("@/pages/Address/Regions/Regions"));
+const Cities = lazy(() => import("@/pages/Address/Cities/Cities"));
+const Branches = lazy(() => import("@/pages/Address/Branches/Branches"));
+const Countries = lazy(() => import("@/pages/Address/Countries/Countries"));
 const ArchivePage = lazy(() => import("@/pages/Archive/ArchivePage"));
 
 
@@ -337,6 +339,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <Countries />
+          </Suspense>
+        ),
+      },
+      {
+        path: "address/countries/add",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AddCountry />
+          </Suspense>
+        ),
+      },
+      {
+        path: "address/countries/edit/:id",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <EditeCountry />
           </Suspense>
         ),
       },

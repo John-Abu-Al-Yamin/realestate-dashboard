@@ -90,7 +90,7 @@ const StatsCards = ({ statistics, filter, setFilter }) => {
     <div className="space-y-4">
       <div className={`flex justify-start`}>
         <Select value={filter} onValueChange={setFilter}>
-          <SelectTrigger className="w-[150px] border-none shadow-none font-bold focus:ring-0 ring-0 bg-transparent text-2xl">
+          <SelectTrigger className="w-[170px] border-none shadow-none font-bold focus:ring-0 ring-0 bg-transparent text-2xl">
             <SelectValue placeholder="Select period" />
           </SelectTrigger>
           <SelectContent>

@@ -147,7 +147,6 @@ const schema = z.object({
     });
   };
 
-ges
   const handleImageChange = (file) => {
     setimage(file);
     setValue("image", file);

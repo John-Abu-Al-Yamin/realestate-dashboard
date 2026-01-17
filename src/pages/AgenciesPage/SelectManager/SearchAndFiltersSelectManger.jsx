@@ -28,7 +28,7 @@ const SearchAndFiltersSelectManger = ({
 
   const toggleVoiceSearch = () => {
     if (!("webkitSpeechRecognition" in window)) {
-      alert("المتصفح لا يدعم البحث الصوتي");
+      toast.warning("المتصفح لا يدعم البحث الصوتي");
       return;
     }
 

@@ -338,7 +338,8 @@
     "falLicenseRequired": "رخصة فال مطلوبة",
     "falLicenseAttachmentRequired": "مرفق رخصة فال مطلوب",
     "addressAttachmentRequired": "مرفق العنوان مطلوب",
-    "regionRequired": "يرجى اختيار المنطقة"
+    "regionRequired": "يرجى اختيار المنطقة",
+    "Country Code": "رمز الدولة مطلوب"
   },
   "Commercial License Attachment": "مرفق السجل التجاري",
   "Tax License Attachment": "مرفق الرقم الضريبي",
@@ -388,5 +389,11 @@
   "search_placeholder": "ابحث بالاسم ...",
   "Not Found Any Agencies": "لا توجد اي وكالات",
   "Invalid email address": "البريد الإلكتروني غير صالح",
-  "Archive": "أرشيف"
+  "Archive": "أرشيف",
+  "Add Country": "إضافة دولة",
+  "Country List": "قائمة الدول",
+  "countrys": "الدول",
+  "Country Name": "اسم الدولة",
+  "Country Code": "رمز الدولة",
+  "Edite Country": "تعديل الدولة"
 }

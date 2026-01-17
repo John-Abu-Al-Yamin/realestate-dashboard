@@ -37,7 +37,7 @@ const OtpVerificationForm = () => {
   const handleVerify = () => {
     const isComplete = otp.every((num) => num !== "");
     if (!isComplete) {
-      alert(t("otp.enterAllDigits"));
+      toast.warningt("otp.enterAllDigits");
       return;
     }
 

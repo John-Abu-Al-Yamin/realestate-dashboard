@@ -392,5 +392,9 @@
   "search_placeholder": "Search by name ",
   "Not Found Any Agencies": "Not Found Any Agencies",
   "Invalid email address": "Invalid email address",
-  "Archive": "Archive"
+  "Archive": "Archive",
+  "Add Country": "Add Country",
+  "Country Name": "Country Name",
+  "Country Code": "Country Code",
+  "Edite Country": "Edite Country"
 }

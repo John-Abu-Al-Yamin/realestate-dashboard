@@ -25,6 +25,9 @@ const endPoints = {
   // agencies/for-subscription
   agenciesForSubscription: "/agencies/for-subscription",
 
+  // countries
+  countries: "/countries",
+
 };
 
 export default endPoints;

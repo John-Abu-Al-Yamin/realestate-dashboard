@@ -26,5 +26,9 @@ const queryKeys = {
   // agencies/for-subscription
   agenciesForSubscription: "/agencies/for-subscription",
 
+  
+  // countries
+  countries: "/countries",
+
 };
 export default queryKeys;
