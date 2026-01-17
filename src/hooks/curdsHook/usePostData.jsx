@@ -57,7 +57,7 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
             />
           ),
           style: {
-            border: "1px solid #81D4A9",
+            // border: "1px solid #81D4A9",
             color: "#2E2E34",
             backgroundColor: "#D7F4E1",
             fontSize: "18px",
@@ -125,7 +125,7 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
                   />
                 ),
                 style: {
-                  border: "1px solid #FFA2A2",
+                  // border: "1px solid #FFA2A2",
                   color: "#2E2E34",
                   backgroundColor: "#FFE1E1",
                   fontSize: "18px",
@@ -175,7 +175,7 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
                 />
               ),
               style: {
-                border: "1px solid #FFA2A2",
+                // border: "1px solid #FFA2A2",
                 color: "#2E2E34",
                 backgroundColor: "#FFE1E1",
                 fontSize: "16px",
@@ -226,7 +226,7 @@ const usePostData = (url, mutationKeys, invalidateQueryKey) => {
               />
             ),
             style: {
-              border: "1px solid #FFA2A2",
+              // border: "1px solid #FFA2A2",
               color: "#2E2E34",
               backgroundColor: "#FFE1E1",
               fontSize: "18px",

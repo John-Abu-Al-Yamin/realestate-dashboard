@@ -20,7 +20,8 @@
     "regions": "المناطق",
     "cities": "المدن",
     "branches": "الحي",
-    "Archive": "الأرشيف"
+    "Archive": "الأرشيف",
+    "countrys": "الدول"
   },
   "login": {
     "welcomeBack": "مرحباً بك مجدداً",
@@ -72,7 +73,12 @@
   },
 
   "dashboard": {
-    "welcomeBack": "مرحباً بك مجدداً"
+    "welcomeBack": "مرحباً بك مجدداً في",
+    "Review lists": "قوائم المراجعة",
+    "agencies": "الوكالات",
+    "subscriptions": "الاشتراكات",
+    "managers": "المديرين",
+    "subscriptionPlans": "خطط الاشتراك"
   },
   "Add Agency": "إضافة وكالة",
   "Agency Info": "معلومات الوكالة",

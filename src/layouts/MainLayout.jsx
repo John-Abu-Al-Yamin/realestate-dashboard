@@ -10,7 +10,7 @@ const MainLayout = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="min-h-screen  overflow-hidden">
+    <div className="min-h-screen overflow-x-visible">
       {/* Sidebar for desktop */}
       <div className="hidden md:flex">
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />

@@ -24,9 +24,7 @@ const LanguageSwitcher = ({ isSidebarOpen = true }) => {
       {isSidebarOpen && (
         <>
           {/* <span className="hidden sm:inline">{isArabic ? "🇺🇸" : "🇸🇦"}</span> */}
-          <span className="hidden md:inline">
-            {isArabic ? "English" : "العربية"}
-          </span>
+          <span className="">{isArabic ? "English" : "العربية"}</span>
         </>
       )}
     </div>

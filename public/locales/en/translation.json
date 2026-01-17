@@ -19,8 +19,9 @@
     "Address": "Address",
     "regions": "Regions",
     "cities": "Cities",
-    "branches": "Branches",
-    "Archive": "Archive"
+    "branches": "Districts",
+    "Archive": "Archive",
+    "countrys": "Countries"
   },
 
   "login": {
@@ -71,7 +72,12 @@
     "backToLogin": "Back to login"
   },
   "dashboard": {
-    "welcomeBack": "Welcome Back"
+    "welcomeBack": "Welcome Back",
+    "Review lists": "Review lists",
+    "agencies": "Agencies",
+    "subscriptions": "Subscriptions",
+    "managers": "Managers",
+    "subscriptionPlans": "Subscription Plans"
   },
   "Add Agency": "Add Agency",
   "Agency Info": "Agency Info",

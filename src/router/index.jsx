@@ -86,7 +86,9 @@ const SocialLinks = lazy(() => import("@/pages/SocialLinks/SocialLinks"));
 const Regions = lazy(() => import("@/pages/Address/Regions"));
 const Cities = lazy(() => import("@/pages/Address/Cities"));
 const Branches = lazy(() => import("@/pages/Address/Branches"));
+const Countries = lazy(() => import("@/pages/Address/Countries"));
 const ArchivePage = lazy(() => import("@/pages/Archive/ArchivePage"));
+
 
 // Loading component
 const LoadingFallback = () => (
@@ -330,6 +332,14 @@ const router = createBrowserRouter([
         ),
       },
 
+      {
+        path: "address/countries",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Countries />
+          </Suspense>
+        ),
+      },
       {
         path: "address/regions",
         element: (

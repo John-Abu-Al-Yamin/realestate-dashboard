@@ -5,19 +5,18 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Header = () => {
-    
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gray-100 p-6 shadow-sm">
+    <div className="relative overflow-hidden rounded-3xl  p-6 ">
       <div className="flex justify-between items-center mb-4">
         {/* العنوان */}
         <h1 className="text-xl font-bold text-gray-900">
-          {t("dashboard.welcomeBack")} Anas
+          {t("dashboard.welcomeBack")} OvreView
         </h1>
 
         {/* اليمين Buttons */}
-        <div className="flex gap-x-4">
+        {/* <div className="flex gap-x-4">
           <Button
             size="icon"
             variant="ghost"
@@ -32,7 +31,7 @@ const Header = () => {
               A
             </AvatarFallback>
           </Avatar>
-        </div>
+        </div> */}
       </div>
     </div>
   );

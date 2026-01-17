@@ -4,11 +4,11 @@ import endPoints from "@/hooks/EndPoints/endPoints";
 import queryKeys from "@/hooks/EndPoints/queryKeys";
 
 
-export const useGetstatistics = () => {
+export const useGetstatistics = (params = {}) => {
   const { data, isPending, refetch, ...rest } = useGetData({
     url: endPoints.statistics,
-    params: {},
-    queryKeys: [queryKeys.statistics],
+    params: params,
+    queryKeys: [queryKeys.statistics, params],
   });
 
   return {

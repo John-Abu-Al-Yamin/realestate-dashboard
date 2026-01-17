@@ -17,6 +17,7 @@ import {
   Map,
   Building2,
   MapPinned,
+  Globe,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../LanguageSwitcher";
@@ -56,16 +57,20 @@ const SidebarMobile = () => {
         key={item.href}
         to={item.href}
         onClick={() => setIsExpanded(false)}
-        className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-300
+        className={({ isActive }) => `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-300
           ${isActive
-            ? "bg-black dark:bg-white text-white dark:text-black shadow-md scale-[1.02]"
+            ? "bg-gray-200 dark:bg-gray-700 text-black dark:text-white shadow-md scale-[1.02]"
             : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
           }`}
       >
-        <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.5} />
-        <span className="font-medium whitespace-nowrap">
-          {t(`sidebar.${item.key}`)}
-        </span>
+        {({ isActive }) => (
+          <>
+            <Icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "bg-gray-200 text-black rounded p-0.5" : ""}`} strokeWidth={1.5} />
+            <span className="font-medium whitespace-nowrap">
+              {t(`sidebar.${item.key}`)}
+            </span>
+          </>
+        )}
       </NavLink>
     );
   };
@@ -85,21 +90,23 @@ const SidebarMobile = () => {
             <NavLink
               key={item.href}
               to={item.href}
-              className={`flex items-center justify-center p-2 rounded-lg transition-all duration-300
+              className={({ isActive }) => `flex items-center justify-center p-2 rounded-lg transition-all duration-300
                 ${isActive
-                  ? "bg-black dark:bg-white text-white dark:text-black px-3"
+                  ? "bg-gray-200 dark:bg-gray-700 text-black dark:text-white px-3"
                   : "text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               onClick={() => setIsExpanded(false)}
             >
-              <div className="flex items-center gap-2">
-                <Icon className="h-5 w-5" strokeWidth={1.5} />
-                {isActive && (
-                  <span className="text-xs font-medium">
-                    {t(`sidebar.${item.key}`)}
-                  </span>
-                )}
-              </div>
+              {({ isActive }) => (
+                <div className="flex items-center gap-2">
+                  <Icon className={`h-5 w-5 ${isActive ? "bg-gray-200 text-black rounded p-0.5" : ""}`} strokeWidth={1.5} />
+                  {isActive && (
+                    <span className="text-xs font-medium">
+                      {t(`sidebar.${item.key}`)}
+                    </span>
+                  )}
+                </div>
+              )}
             </NavLink>
           );
         })}
@@ -183,17 +190,38 @@ const SidebarMobile = () => {
                   ${isAddressOpen ? "max-h-40 mt-1" : "max-h-0"}`}
               >
                 <NavLink
-                  to="/address/regions"
+                  to="/address/countries"
                   onClick={() => setIsExpanded(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${isActive
-                      ? "bg-black text-white"
+                      ? "bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
                       : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
                     }`
                   }
                 >
-                  <Map className="h-4 w-4" strokeWidth={1.5} />
-                  {t("sidebar.regions")}
+                  {({ isActive }) => (
+                    <>
+                      <Globe className={`h-4 w-4 ${isActive ? "bg-gray-200 text-black rounded p-0.5" : ""}`} strokeWidth={1.5} />
+                      {t("sidebar.countrys")}
+                    </>
+                  )}
+                </NavLink>
+                <NavLink
+                  to="/address/regions"
+                  onClick={() => setIsExpanded(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${isActive
+                      ? "bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <Map className={`h-4 w-4 ${isActive ? "bg-gray-200 text-black rounded p-0.5" : ""}`} strokeWidth={1.5} />
+                      {t("sidebar.regions")}
+                    </>
+                  )}
                 </NavLink>
 
                 <NavLink
@@ -201,13 +229,17 @@ const SidebarMobile = () => {
                   onClick={() => setIsExpanded(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${isActive
-                      ? "bg-black text-white"
+                      ? "bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
                       : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
                     }`
                   }
                 >
-                  <Building2 className="h-4 w-4" strokeWidth={1.5} />
-                  {t("sidebar.cities")}
+                  {({ isActive }) => (
+                    <>
+                      <Building2 className={`h-4 w-4 ${isActive ? "bg-gray-200 text-black rounded p-0.5" : ""}`} strokeWidth={1.5} />
+                      {t("sidebar.cities")}
+                    </>
+                  )}
                 </NavLink>
 
                 <NavLink
@@ -215,13 +247,17 @@ const SidebarMobile = () => {
                   onClick={() => setIsExpanded(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${isActive
-                      ? "bg-black text-white"
+                      ? "bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
                       : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
                     }`
                   }
                 >
-                  <MapPinned className="h-4 w-4" strokeWidth={1.5} />
-                  {t("sidebar.branches")}
+                  {({ isActive }) => (
+                    <>
+                      <MapPinned className={`h-4 w-4 ${isActive ? "bg-gray-200 text-black rounded p-0.5" : ""}`} strokeWidth={1.5} />
+                      {t("sidebar.branches")}
+                    </>
+                  )}
                 </NavLink>
               </div>
             </div>

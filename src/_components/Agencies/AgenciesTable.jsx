@@ -10,6 +10,7 @@ import {
   Info,
   UserPen,
   ArchiveRestore,
+  Image,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,14 @@ import { useTranslation } from "next-i18next";
 import { useNavigate } from "react-router-dom";
 import CustomLoaderTable from "@/customs/CustomLoaderTable";
 import { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 import {
   Pagination,
@@ -118,53 +127,45 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
 
   return (
     <>
-      <div className="rounded-lg border border-border overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[1000px] border-collapse">
-            <thead>
-              <tr className="border-b border-gray-100 bg-gray-100 hover:bg-gray-50">
+      <div className=" ">
+        <div className="rounded-md border">
+          <Table className="border-collapse">
+            <TableHeader>
+              <TableRow>
                 {headers.map((header, index) => (
-                  <th
+                  <TableHead
                     key={index}
-                    className={`h-12 px-2 md:px-4 align-middle font-medium text-gray-500 text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                      isRTL ? "text-right" : "text-left"
-                    }`}
+                    className={isRTL ? "text-right" : "text-left"}
                   >
                     {header}
-                  </th>
+                  </TableHead>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {data.length > 0 ? (
                 data.map((row) => (
-                  <tr
+                  <TableRow
                     key={row.id}
-                    className="border-b border-gray-200 transition-colors hover:bg-gray-50/50 data-[state=selected]:bg-gray-50"
+                    className="cursor-pointer transition-colors hover:bg-muted/60"
                   >
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="font-medium">#{row.id}</div>
                       <div className="text-gray-700 text-sm">
                         {row?.master_data?.brand_name || "-"}
                       </div>
-                    </td>
+                    </TableCell>
 
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       {row.manager.first_name} {row.manager.second_name}{" "}
                       {row.manager.last_name}
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <Badge
                         variant="outline"
@@ -178,21 +179,17 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                       >
                         {t(row.setup_status)}
                       </Badge>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="flex items-center gap-2">
                         {renderBoolean(row.setup_steps?.master_data)}
                         {renderMasterData(row.master_data)}
                       </div>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="flex items-center gap-2">
                         {renderBoolean(row.setup_steps?.profile)}
@@ -205,11 +202,9 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                           </Badge>
                         )}
                       </div>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="flex items-center gap-2">
                         {renderBoolean(row.setup_steps?.verification)}
@@ -222,21 +217,17 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                           </Badge>
                         )}
                       </div>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="flex items-center gap-2">
                         {renderBoolean(row.setup_steps?.legal)}
                         {row.legal && renderLegal(row.legal)}
                       </div>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="flex items-center gap-2">
                         {renderBoolean(row.setup_steps?.visual_identity)}
@@ -251,50 +242,46 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                           </div>
                         )}
                       </div>
-                    </td>
+                    </TableCell>
 
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="flex items-center gap-2">
                         {row.visual_identity && (
                           <div className="flex items-center gap-2">
-                            {row.visual_identity.logo && (
+                            {row.visual_identity.logo ? (
                               <img
                                 src={row.visual_identity.logo}
                                 alt="Logo"
                                 className="h-8 w-8 object-contain rounded border border-gray-200"
                               />
+                            ) : (
+                              <div className="h-8 w-8 flex items-center justify-center rounded border border-gray-200 bg-gray-50">
+                                <Image className="h-4 w-4 text-gray-400" />
+                              </div>
                             )}
                           </div>
                         )}
                       </div>
-                    </td>
+                    </TableCell>
 
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="text-xs">
                         {formatDate(row.created_at)}
                       </div>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm [&:has([role=checkbox])]:pr-0 ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="text-xs">
                         {formatDate(row.updated_at)}
                       </div>
-                    </td>
-                    <td
-                      className={`p-2 md:p-4 align-middle text-xs md:text-sm ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                    </TableCell>
+                    <TableCell
+                      className={isRTL ? "text-right" : "text-left"}
                     >
                       <div className="flex items-center gap-2">
                         {/* Actions Menu */}
@@ -377,11 +364,11 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                               {isRTL ? (
                                 <>
                                   {t("Archive")}
-                                  <ArchiveRestore  className="ml-2 h-4 w-4" />
+                                  <ArchiveRestore className="ml-2 h-4 w-4" />
                                 </>
                               ) : (
                                 <>
-                                  <ArchiveRestore  className="mr-2 h-4 w-4" />
+                                  <ArchiveRestore className="mr-2 h-4 w-4" />
                                   {t("Archive")}
                                 </>
                               )}
@@ -417,21 +404,21 @@ const AgenciesTable = ({ agencies, isPending, page, setPage }) => {
                           <Info className="h-4 w-4 " />
                         </button> */}
                       </div>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))
               ) : (
-                <tr>
-                  <td
+                <TableRow>
+                  <TableCell
                     colSpan={headers.length}
                     className="p-4 text-center text-gray-500"
                   >
                     {t("Not Found Any Agencies")}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               )}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </div>
       {meta && (
